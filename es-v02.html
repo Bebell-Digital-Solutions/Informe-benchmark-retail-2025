@@ -4,11 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tendencias de Consumo 2025 - Bebell Digital Solutions</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        /* Existing styles... */
+        :root {
+            --primary-color: #DF1783;
+            --secondary-color: #333;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --white: #fff;
+            --black: #000;
+        }
         
-        /* New Hero Card Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        #page-container {
+            padding: 0 15px;
+        }
+        
+        #main-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .content-section {
+            padding: 20px;
+            margin: 20px 0;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2 {
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+        }
+        
+        p {
+            margin-bottom: 1em;
+            color: var(--text-color);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            width: 200px;
+            margin: 10px;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #b8126a;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        #main-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            margin-top: 20px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+        }
+        
+        /* Color contrast fixes */
+        a {
+            color: var(--primary-color);
+        }
+        
+        a:hover {
+            color: #b8126a;
+        }
+        
+        dt {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 10px;
+        }
+
+
+  /* New Hero Card Styles */
         #hero-card {
             display: flex;
             flex-wrap: wrap;
@@ -113,9 +223,14 @@
                 font-size: 1.1rem;
             }
         }
+
+
+        
     </style>
 </head>
 <body>
+
+
     <div id="page-container">
         <header id="main-header">
             <h1>Tendencias de Consumo en 2025</h1>
@@ -137,8 +252,352 @@
             </div>
         </section>
 
-        <!-- Rest of your existing content... -->
+        
+
+        <section id="introduction-section" class="content-section">
+            <h2>Introducción</h2>
+            <p>En la primera mitad de 2025, el comportamiento de compra de los consumidores ha experimentado cambios significativos. A pesar de un aumento en la actividad de compra, el gasto total ha mostrado un crecimiento mínimo. Este informe analiza estos cambios y ofrece estrategias para que marcas, freelancers y profesionales se adapten a esta nueva realidad.</p>
+        </section>
+
+        <section id="research-section" class="content-section">
+            <h2>1. Mayor Investigación, Menor Gasto</h2>
+            <p><strong>Hallazgo Clave:</strong> Aunque los clics aumentaron un 18 % y los pedidos un 12 %, el gasto total solo creció un 0,4 %. Esto indica que los consumidores están investigando más antes de comprar y siendo más selectivos con sus gastos.</p>
+            
+            <div class="chart-container">
+                <canvas id="researchChart"></canvas>
+            </div>
+            
+            <p><strong>Ejemplo Práctico:</strong> Una tienda en línea de tecnología observa que, aunque recibe más visitas, las ventas no aumentan proporcionalmente. Esto sugiere que los usuarios están comparando precios y características antes de tomar una decisión de compra.</p>
+            <p><strong>Reflexión Profesional:</strong> Las marcas deben centrarse en proporcionar información detallada y comparaciones claras para ayudar a los consumidores en su proceso de investigación.</p>
+        </section>
+
+        <section id="aov-section" class="content-section">
+            <h2>2. Disminución del Valor Promedio por Pedido (AOV)</h2>
+            <p><strong>Hallazgo Clave:</strong> El valor promedio por pedido (AOV) disminuyó un 10 %, lo que indica que los consumidores están comprando más productos de menor precio.</p>
+            
+            <div class="chart-container">
+                <canvas id="aovChart"></canvas>
+            </div>
+            
+            <p><strong>Ejemplo Práctico:</strong> Un minorista de moda nota que los clientes compran más artículos de bajo costo en lugar de invertir en productos de mayor precio. Esto podría reflejar una estrategia de compra más cautelosa.</p>
+            <p><strong>Reflexión Profesional:</strong> Las marcas deben considerar ofrecer paquetes de productos o descuentos por volumen para incentivar compras de mayor valor.</p>
+        </section>
+
+        <section id="marketing-section" class="content-section">
+            <h2>3. Evolución de las Asociaciones de Marketing</h2>
+            <p><strong>Hallazgo Clave:</strong> Los programas de lealtad han perdido participación en los pedidos, mientras que las plataformas de ofertas y cupones han duplicado su participación.</p>
+            
+            <div class="chart-container">
+                <canvas id="marketingChart"></canvas>
+            </div>
+            
+            <p><strong>Ejemplo Práctico:</strong> Una marca de cosméticos observa que las colaboraciones con influencers que ofrecen códigos de descuento generan más ventas que los programas de recompensas tradicionales.</p>
+            <p><strong>Reflexión Profesional:</strong> Es esencial diversificar las estrategias de marketing y explorar nuevas formas de colaboración para llegar eficazmente al público objetivo.</p>
+        </section>
+
+        <section id="categories-section" class="content-section">
+            <h2>4. Comportamientos de Compra por Categoría</h2>
+            <p><strong>Hallazgo Clave:</strong> Las categorías de salud, belleza, deportes y hogar han mostrado un aumento en el AOV, mientras que la electrónica ha experimentado una caída en la conversión.</p>
+            
+            <div class="chart-container">
+                <canvas id="categoriesChart"></canvas>
+            </div>
+            
+            <p><strong>Ejemplo Práctico:</strong> Una tienda de deportes en línea nota que los clientes están comprando más equipos de ejercicio de gama alta, mientras que las ventas de gadgets electrónicos han disminuido.</p>
+            <p><strong>Reflexión Profesional:</strong> Es crucial adaptar las estrategias de marketing según las tendencias específicas de cada categoría de producto.</p>
+        </section>
+
+        <section id="strategies-section" class="content-section">
+            <h2>5. Estrategias para Adaptarse al Nuevo Comportamiento del Consumidor</h2>
+            <ul>
+                <li><strong>Implementar Atribución Multicanal:</strong> Utilizar herramientas que permitan rastrear el recorrido completo del cliente para comprender mejor su proceso de decisión.</li>
+                <li><strong>Diversificar las Asociaciones de Marketing:</strong> Colaborar con una variedad de socios, incluyendo plataformas de cupones, influencers y creadores de contenido, para ampliar el alcance.</li>
+                <li><strong>Aprovechar los Ciclos Presupuestarios:</strong> Planificar campañas de marketing en momentos clave del año, como enero, cuando los consumidores están más dispuestos a gastar.</li>
+                <li><strong>Adaptar los Mensajes por Categoría de Producto:</strong> Personalizar las estrategias de marketing según las características y comportamientos de compra de cada categoría.</li>
+            </ul>
+        </section>
+
+        <section id="projections-section" class="content-section">
+            <h2>Proyecciones Futuras</h2>
+            <p><strong>Próximo Año (2026):</strong> Se espera que la tendencia de investigación prolongada continúe, con un enfoque en la toma de decisiones informadas y la comparación de precios.</p>
+            <p><strong>5 Años (2030):</strong> El marketing de influencia y las asociaciones de creadores de contenido dominarán el panorama, con una mayor integración de la inteligencia artificial en las estrategias de marketing.</p>
+            <p><strong>10 Años (2035):</strong> La realidad aumentada y virtual transformarán la experiencia de compra en línea, permitiendo a los consumidores probar productos de manera virtual antes de comprarlos.</p>
+            
+            <div class="chart-container">
+                <canvas id="projectionsChart"></canvas>
+            </div>
+        </section>
+
+        <section id="glossary-section" class="content-section">
+            <h2>Glosario</h2>
+            <dl>
+                <dt>AOV (Average Order Value):</dt>
+                <dd>Valor promedio de cada pedido realizado por los clientes.</dd>
+                <dt>Conversión:</dt>
+                <dd>Proceso en el que un visitante realiza una acción deseada, como una compra.</dd>
+                <dt>Marketing de Afiliados:</dt>
+                <dd>Estrategia en la que una marca recompensa a socios por generar tráfico o ventas a través de sus esfuerzos de marketing.</dd>
+                <dt>Influencer Marketing:</dt>
+                <dd>Colaboración con personas influyentes para promocionar productos o servicios.</dd>
+                <dt>Atribución Multicanal:</dt>
+                <dd>Método para rastrear y analizar el recorrido del cliente a través de múltiples puntos de contacto antes de la conversión.</dd>
+            </dl>
+        </section>
+
+        <section id="download-section" class="content-section">
+            <h2>Descarga el Informe Completo</h2>
+            <p>Para obtener el informe completo en formato PDF, incluyendo gráficos interactivos y ejemplos detallados.</p>
+            
+            <div class="button-container">
+                <button id="downloadPdfBtn" class="cta-button">Descargar PDF del Artículo</button>
+                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">Más Recursos</a>
+            </div>
+        </section>
+
+        <footer id="main-footer">
+            <p>&copy; 2025 Bebell Digital Solutions. Todos los derechos reservados.</p>
+        </footer>
     </div>
+
+    <script>
+        // Initialize charts when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart 1: Research vs Spending
+            const researchCtx = document.getElementById('researchChart').getContext('2d');
+            new Chart(researchCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Clics', 'Pedidos', 'Gasto Total'],
+                    datasets: [{
+                        label: 'Cambio porcentual 2024-2025',
+                        data: [18, 12, 0.4],
+                        backgroundColor: [
+                            'rgba(223, 23, 131, 0.7)',
+                            'rgba(223, 23, 131, 0.5)',
+                            'rgba(223, 23, 131, 0.3)'
+                        ],
+                        borderColor: [
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(223, 23, 131, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Cambio porcentual (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Aumento en actividad vs crecimiento del gasto'
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: AOV Change
+            const aovCtx = document.getElementById('aovChart').getContext('2d');
+            new Chart(aovCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Valor promedio por pedido (AOV)',
+                        data: [120, 115, 110, 108, 107, 105],
+                        fill: false,
+                        backgroundColor: 'rgba(223, 23, 131, 0.7)',
+                        borderColor: 'rgba(223, 23, 131, 1)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Valor promedio ($)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Mes del año 2025'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Disminución del valor promedio por pedido'
+                        }
+                    }
+                }
+            });
+
+            // Chart 3: Marketing Partnerships
+            const marketingCtx = document.getElementById('marketingChart').getContext('2d');
+            new Chart(marketingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
+                    datasets: [{
+                        data: [15, 30, 40, 15],
+                        backgroundColor: [
+                            'rgba(223, 23, 131, 0.7)',
+                            'rgba(51, 51, 51, 0.7)',
+                            'rgba(223, 23, 131, 0.5)',
+                            'rgba(51, 51, 51, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(51, 51, 51, 1)',
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(51, 51, 51, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Participación en pedidos por tipo de asociación'
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            // Chart 4: Categories Performance
+            const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
+            new Chart(categoriesCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
+                    datasets: [{
+                        label: 'Cambio en AOV (%)',
+                        data: [12, 8, 15, 5, -10, -2],
+                        backgroundColor: 'rgba(223, 23, 131, 0.2)',
+                        borderColor: 'rgba(223, 23, 131, 1)',
+                        pointBackgroundColor: 'rgba(223, 23, 131, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: -15,
+                            suggestedMax: 20
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Rendimiento por categoría de producto'
+                        }
+                    }
+                }
+            });
+
+            // Chart 5: Future Projections
+            const projectionsCtx = document.getElementById('projectionsChart').getContext('2d');
+            new Chart(projectionsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2025', '2026', '2030', '2035'],
+                    datasets: [
+                        {
+                            label: 'Investigación prolongada',
+                            data: [85, 90, 75, 60],
+                            backgroundColor: 'rgba(223, 23, 131, 0.7)'
+                        },
+                        {
+                            label: 'Marketing de influencia',
+                            data: [40, 45, 80, 65],
+                            backgroundColor: 'rgba(51, 51, 51, 0.7)'
+                        },
+                        {
+                            label: 'Realidad aumentada',
+                            data: [10, 15, 35, 75],
+                            backgroundColor: 'rgba(223, 23, 131, 0.5)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Adopción estimada (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Proyección de tendencias de consumo'
+                        }
+                    }
+                }
+            });
+
+            // PDF Download functionality
+            document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+                // Use html2canvas and jsPDF to generate PDF
+                const { jsPDF } = window.jspdf;
+                
+                html2canvas(document.getElementById('page-container')).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 295; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                    
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+                    
+                    pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
+                });
+            });
+        });
+    </script>
+
 
     <script>
         // You can add this to your existing script section
