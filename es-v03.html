@@ -1215,7 +1215,7 @@
     }
 
     async function generatePDF() {
-        showNotification('Generando el PDF... por favor, espera.', 'info');
+        showNotification('⏱️ Generando el PDF... por favor, espera.', 'info');
         try {
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF('p', 'mm', 'a4');
@@ -1273,7 +1273,7 @@
             showSuccessModal();
 
         } catch (error) {
-            console.error('Error generating PDF:', error);
+            console.error('Error generando PDF:', error);
             showNotification('Error: No se pudo generar el PDF.', 'error');
         } finally {
             // Restore original state
