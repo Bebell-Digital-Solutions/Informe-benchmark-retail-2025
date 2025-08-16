@@ -598,11 +598,11 @@
 
         <section id="hero-card">
             <div id="hero-content">
-                <h2 class="hero-title">Informe Exclusivo 2025</h2>
+                <h2 class="hero-title">📊 Informe Exclusivo 2025</h2>
                 <h3 class="hero-subtitle">Datos clave sobre el comportamiento del consumidor</h3>
                 <p class="hero-text">Descubre las tendencias que están transformando el panorama del marketing digital y el comercio electrónico en este año clave. Nuestro informe detallado te proporcionará insights accionables para tu estrategia.</p>
                 <button id="downloadPdfBtn" class="cta-button">
-                    <i data-lucide="download"></i>
+                    <i class="fas fa-download" style="margin-right: 8px;"></i>
                     <span>Descargar Informe</span>
                 </button>
             </div>
@@ -611,8 +611,18 @@
             </div>
         </section>
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <section id="introduction-section" class="content-section">
-            <h2>Introducción</h2>
+            <h2>📍 Introducción</h2>
             <p>En la primera mitad de 2025, el comportamiento de compra de los consumidores ha experimentado cambios significativos. A pesar de un aumento en la actividad de compra, el gasto total ha mostrado un crecimiento mínimo. Este informe analiza estos cambios y ofrece estrategias para que marcas, freelancers y profesionales se adapten a esta nueva realidad.</p>
             
             <div class="video-container">
@@ -702,7 +712,7 @@
         </section>
 
         <section id="glossary-section" class="content-section">
-            <h2>📒 Glosario</h2>
+            <h2>📓 Glosario</h2>
             <dl>
                 <dt>📌 AOV (Average Order Value):</dt>
                 <dd>Valor promedio de cada pedido realizado por los clientes.</dd>
@@ -717,15 +727,68 @@
             </dl>
         </section>
 
-        <section id="download-section" class="content-section">
-            <h2>Descarga el Informe Completo</h2>
-            <p>Para obtener el informe completo en formato PDF, incluyendo gráficos interactivos y ejemplos detallados.</p>
+        
+        
+        
+        
+        
+        
+<section id="download-section" class="content-section" style="text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Descarga el Informe Completo</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">Para obtener el informe completo en formato PDF, incluyendo gráficos interactivos y ejemplos detallados.</p>
+        
+        <div class="button-container" style="
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 0 auto;
+        ">
+            <button id="downloadPdfBtn2" class="cta-button" style="
+                background: #DF1783;
+                color: white;
+                padding: 12px 24px;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            ">
+                <i class="fas fa-download" style="margin-right: 8px;"></i>
+                Descargar Reporte
+            </button>
             
-            <div class="button-container">
-                <button id="downloadPdfBtn2" class="cta-button">Descargar Reporte</button>
-                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">Explorar Fuente</a>
-            </div>
-        </section>
+            <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" 
+               class="cta-button" 
+               target="_blank"
+               style="
+                   background: #DF1783;
+                   color: white;
+                   padding: 12px 24px;
+                   border: none;
+                   border-radius: 6px;
+                   font-weight: 600;
+                   cursor: pointer;
+                   transition: all 0.3s ease;
+                   text-decoration: none;
+                   display: inline-flex;
+                   align-items: center;
+                   justify-content: center;
+               ">
+                <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>
+                Explorar Fuente
+            </a>
+        </div>
+    </div>
+</section>
+        
+        
+        
+        
 
         <section id="comments-section" class="content-section">
             <h2>Comentarios</h2>
@@ -880,8 +943,10 @@
 
 
     
+<script type="module">
+    // Import the confetti library
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
 
- <script>
     // Global functions and event listeners
     document.addEventListener('DOMContentLoaded', function() {
         initCharts();
@@ -1138,6 +1203,13 @@
         `;
         modal.setAttribute('data-modal', true);
         document.body.appendChild(modal);
+        
+        // This is the new line to trigger the confetti
+        confetti({
+            particleCount: 200,
+            spread: 150,
+            origin: { x: 0.5, y: 0.5 }
+        });
     }
 
     async function generatePDF() {
@@ -1155,8 +1227,6 @@
                 btn.style.backgroundColor = '#DF1783';
                 btn.style.color = '#FFFFFF';
             });
-            const ctaBanner = document.querySelector('.cta-banner');
-            if (ctaBanner) ctaBanner.style.display = 'none';
 
             // Use CSS to force page breaks for sections
             const style = document.createElement('style');
@@ -1212,8 +1282,6 @@
                 btn.style.backgroundColor = '';
                 btn.style.color = '';
             });
-            const ctaBanner = document.querySelector('.cta-banner');
-            if (ctaBanner) ctaBanner.style.display = '';
             const tempStyle = document.querySelector('style[data-temp="true"]');
             if (tempStyle) tempStyle.remove();
         }
