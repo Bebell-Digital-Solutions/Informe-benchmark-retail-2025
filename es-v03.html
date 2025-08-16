@@ -881,8 +881,164 @@
 
     
 
-    <!-- BACK TO TOP ICON-->
-    <script>
+ <script>
+    // Global functions and event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        initCharts();
+        setupPDFDownload();
+        lucide.createIcons();
+        updateCopyrightYear();
+    });
+
+    function updateCopyrightYear() {
+        document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
+    }
+
+    // --- 1. CHART INITIALIZATION ---
+    function initCharts() {
+        new Chart(document.getElementById('researchChart').getContext('2d'), getResearchChartConfig());
+        new Chart(document.getElementById('aovChart').getContext('2d'), getAOVChartConfig());
+        new Chart(document.getElementById('marketingChart').getContext('2d'), getMarketingChartConfig());
+        new Chart(document.getElementById('categoriesChart').getContext('2d'), getCategoriesChartConfig());
+        new Chart(document.getElementById('projectionsChart').getContext('2d'), getProjectionsChartConfig());
+    }
+
+    function getResearchChartConfig() {
+        return {
+            type: 'bar',
+            data: {
+                labels: ['Clics', 'Pedidos', 'Gasto Total'],
+                datasets: [{
+                    label: 'Cambio porcentual 2024-2025',
+                    data: [18, 12, 0.4],
+                    backgroundColor: ['rgba(223, 23, 131, 0.7)', 'rgba(223, 23, 131, 0.5)', 'rgba(223, 23, 131, 0.3)'],
+                    borderColor: ['rgba(223, 23, 131, 1)', 'rgba(223, 23, 131, 1)', 'rgba(223, 23, 131, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: getCommonChartOptions({ yTitle: 'Cambio porcentual (%)', title: 'Aumento en actividad vs crecimiento del gasto' })
+        };
+    }
+
+    function getAOVChartConfig() {
+        return {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Valor promedio por pedido (AOV)',
+                    data: [120, 115, 110, 108, 107, 105],
+                    fill: false,
+                    backgroundColor: 'rgba(223, 23, 131, 0.7)',
+                    borderColor: 'rgba(223, 23, 131, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: getCommonChartOptions({ yTitle: 'Valor promedio ($)', xTitle: 'Mes del año 2025', title: 'Disminución del valor promedio por pedido', beginAtZero: false })
+        };
+    }
+
+    function getMarketingChartConfig() {
+        return {
+            type: 'doughnut',
+            data: {
+                labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
+                datasets: [{
+                    data: [15, 30, 40, 15],
+                    backgroundColor: ['rgba(223, 23, 131, 0.7)', 'rgba(51, 51, 51, 0.7)', 'rgba(223, 23, 131, 0.5)', 'rgba(51, 51, 51, 0.5)'],
+                    borderColor: ['rgba(223, 23, 131, 1)', 'rgba(51, 51, 51, 1)', 'rgba(223, 23, 131, 1)', 'rgba(51, 51, 51, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Participación en pedidos por tipo de asociación' },
+                    legend: { position: 'bottom' }
+                }
+            }
+        };
+    }
+
+    function getCategoriesChartConfig() {
+        return {
+            type: 'radar',
+            data: {
+                labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
+                datasets: [{
+                    label: 'Cambio en AOV (%)',
+                    data: [12, 8, 15, 5, -10, -2],
+                    backgroundColor: 'rgba(223, 23, 131, 0.2)',
+                    borderColor: 'rgba(223, 23, 131, 1)',
+                    pointBackgroundColor: 'rgba(223, 23, 131, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: -15,
+                        suggestedMax: 20
+                    }
+                },
+                plugins: {
+                    title: { display: true, text: 'Rendimiento por categoría de producto' }
+                }
+            }
+        };
+    }
+
+    function getProjectionsChartConfig() {
+        return {
+            type: 'bar',
+            data: {
+                labels: ['2025', '2026', '2030', '2035'],
+                datasets: [{
+                    label: 'Investigación prolongada',
+                    data: [85, 90, 75, 60],
+                    backgroundColor: 'rgba(223, 23, 131, 0.7)'
+                }, {
+                    label: 'Marketing de influencia',
+                    data: [40, 45, 80, 65],
+                    backgroundColor: 'rgba(51, 51, 51, 0.7)'
+                }, {
+                    label: 'Realidad aumentada',
+                    data: [10, 15, 35, 75],
+                    backgroundColor: 'rgba(223, 23, 131, 0.5)'
+                }]
+            },
+            options: getCommonChartOptions({ yTitle: 'Adopción estimada (%)', title: 'Proyección de tendencias de consumo' })
+        };
+    }
+
+    function getCommonChartOptions({ yTitle, xTitle, title, beginAtZero = true }) {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: beginAtZero, title: { display: true, text: yTitle } },
+                ...(xTitle && { x: { title: { display: true, text: xTitle } } })
+            },
+            plugins: { title: { display: true, text: title } }
+        };
+    }
+
+    // --- 2. VIDEO LAZY LOAD ---
+    function loadVideo(thumbnail) {
+        const container = thumbnail.parentElement;
+        const iframe = container.querySelector('.youtube-iframe');
+        iframe.src = iframe.dataset.src;
+        container.classList.add('video-loaded');
+        console.log('Video playback started');
+    }
+
+    // --- 3. BACK TO TOP ICON ---
     document.addEventListener("DOMContentLoaded", function () {
         const backToTop = document.createElement("div");
         backToTop.id = "back-to-top";
@@ -907,386 +1063,162 @@
             }
         });
         backToTop.addEventListener("click", function () {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     });
-    </script>
 
-    <script>
-        function loadVideo(thumbnail) {
-            const container = thumbnail.parentElement;
-            const iframe = container.querySelector('.youtube-iframe');
-            
-            // Load the video
-            iframe.src = iframe.dataset.src;
-            
-            // Switch classes to show video
-            container.classList.add('video-loaded');
-            
-            // Track the play event if needed
-            console.log('Video playback started');
-        }
-    </script>
+    // --- 4. PDF DOWNLOAD & NOTIFICATIONS ---
+    function setupPDFDownload() {
+        document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
+        document.getElementById('downloadPdfBtn2').addEventListener('click', generatePDF);
+    }
 
-    <!-- Official Facebook SDK -->
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            initCharts();
-            setupPDFDownload();
-            lucide.createIcons();
-            updateCopyrightYear();
-        });
-
-        function updateCopyrightYear() {
-            document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
-        }
-
-        // 1. CHART INITIALIZATION
-        function initCharts() {
-            // Initialize all charts
-            new Chart(document.getElementById('researchChart').getContext('2d'), getResearchChartConfig());
-            new Chart(document.getElementById('aovChart').getContext('2d'), getAOVChartConfig());
-            new Chart(document.getElementById('marketingChart').getContext('2d'), getMarketingChartConfig());
-            new Chart(document.getElementById('categoriesChart').getContext('2d'), getCategoriesChartConfig());
-            new Chart(document.getElementById('projectionsChart').getContext('2d'), getProjectionsChartConfig());
-        }
-
-        // Chart Configurations
-        function getResearchChartConfig() {
-            return {
-                type: 'bar',
-                data: {
-                    labels: ['Clics', 'Pedidos', 'Gasto Total'],
-                    datasets: [{
-                        label: 'Cambio porcentual 2024-2025',
-                        data: [18, 12, 0.4],
-                        backgroundColor: [
-                            'rgba(223, 23, 131, 0.7)',
-                            'rgba(223, 23, 131, 0.5)',
-                            'rgba(223, 23, 131, 0.3)'
-                        ],
-                        borderColor: [
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(223, 23, 131, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: getCommonChartOptions({
-                    yTitle: 'Cambio porcentual (%)',
-                    title: 'Aumento en actividad vs crecimiento del gasto'
-                })
-            };
-        }
-
-        function getAOVChartConfig() {
-            return {
-                type: 'line',
-                data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Valor promedio por pedido (AOV)',
-                        data: [120, 115, 110, 108, 107, 105],
-                        fill: false,
-                        backgroundColor: 'rgba(223, 23, 131, 0.7)',
-                        borderColor: 'rgba(223, 23, 131, 1)',
-                        tension: 0.1
-                    }]
-                },
-                options: getCommonChartOptions({
-                    yTitle: 'Valor promedio ($)',
-                    xTitle: 'Mes del año 2025',
-                    title: 'Disminución del valor promedio por pedido',
-                    beginAtZero: false
-                })
-            };
-        }
-
-        function getMarketingChartConfig() {
-            return {
-                type: 'doughnut',
-                data: {
-                    labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
-                    datasets: [{
-                        data: [15, 30, 40, 15],
-                        backgroundColor: [
-                            'rgba(223, 23, 131, 0.7)',
-                            'rgba(51, 51, 51, 0.7)',
-                            'rgba(223, 23, 131, 0.5)',
-                            'rgba(51, 51, 51, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(51, 51, 51, 1)',
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(51, 51, 51, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Participación en pedidos por tipo de asociación'
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            };
-        }
-
-        function getCategoriesChartConfig() {
-            return {
-                type: 'radar',
-                data: {
-                    labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
-                    datasets: [{
-                        label: 'Cambio en AOV (%)',
-                        data: [12, 8, 15, 5, -10, -2],
-                        backgroundColor: 'rgba(223, 23, 131, 0.2)',
-                        borderColor: 'rgba(223, 23, 131, 1)',
-                        pointBackgroundColor: 'rgba(223, 23, 131, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: {
-                                display: true
-                            },
-                            suggestedMin: -15,
-                            suggestedMax: 20
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Rendimiento por categoría de producto'
-                        }
-                    }
-                }
-            };
-        }
-
-        function getProjectionsChartConfig() {
-            return {
-                type: 'bar',
-                data: {
-                    labels: ['2025', '2026', '2030', '2035'],
-                    datasets: [
-                        {
-                            label: 'Investigación prolongada',
-                            data: [85, 90, 75, 60],
-                            backgroundColor: 'rgba(223, 23, 131, 0.7)'
-                        },
-                        {
-                            label: 'Marketing de influencia',
-                            data: [40, 45, 80, 65],
-                            backgroundColor: 'rgba(51, 51, 51, 0.7)'
-                        },
-                        {
-                            label: 'Realidad aumentada',
-                            data: [10, 15, 35, 75],
-                            backgroundColor: 'rgba(223, 23, 131, 0.5)'
-                        }
-                    ]
-                },
-                options: getCommonChartOptions({
-                    yTitle: 'Adopción estimada (%)',
-                    title: 'Proyección de tendencias de consumo'
-                })
-            };
-        }
-
-        function getCommonChartOptions({ yTitle, xTitle, title, beginAtZero = true }) {
-            return {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: beginAtZero,
-                        title: { display: true, text: yTitle }
-                    },
-                    ...(xTitle && {
-                        x: { title: { display: true, text: xTitle } }
-                    })
-                },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: title
-                    }
-                }
-            };
-        }
-
-
-
-
-
-
-        
-
-   // 2. PDF DOWNLOAD FUNCTIONALITY
-// Function to show a simple notification
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: ${type === 'success' ? '#4CAF50' : '#2196F3'};
-        color: white;
-        padding: 15px;
-        border-radius: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        z-index: 10000;
-        transition: opacity 0.5s ease-in-out;
-        opacity: 1;
-    `;
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.addEventListener('transitionend', () => notification.remove());
-    }, 3000);
-}
-
-// Function to show a modal with a success message
-function showSuccessModal() {
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10001;
-    `;
-    modal.innerHTML = `
-        <div style="
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
-        ">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-8.15"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
-            <h3 style="color: #333; margin-bottom: 10px;">¡Descarga Completa!</h3>
-            <p style="color: #666;">El informe ha sido descargado correctamente. 🥳</p>
-            <button onclick="this.closest('[data-modal]').remove()" style="
-                background-color: #DF1783;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                margin-top: 20px;
-                border-radius: 5px;
-                cursor: pointer;
-            ">Cerrar</button>
-        </div>
-    `;
-    modal.setAttribute('data-modal', true);
-    document.body.appendChild(modal);
-}
-
-// Updated generatePDF function with notifications and modal
-async function generatePDF() {
-    showNotification('Generando el PDF... por favor, espera.', 'info');
-    try {
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const pageContainer = document.getElementById('page-container');
-        
-        // Temporarily hide/style elements for the screenshot
-        const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
-        elementsToHide.forEach(el => el.style.display = 'none');
-        const buttons = document.querySelectorAll('.cta-button');
-        buttons.forEach(btn => {
-            btn.style.backgroundColor = '#DF1783';
-            btn.style.color = '#FFFFFF';
-        });
-
-        // Add page break style
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .content-section, #main-header { page-break-before: always; }
-            .content-section:first-of-type, #main-header:first-of-type { page-break-before: avoid; }
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: ${type === 'success' ? '#4CAF50' : type === 'info' ? '#2196F3' : '#F44336'};
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
         `;
-        document.head.appendChild(style);
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.addEventListener('transitionend', () => notification.remove());
+        }, 3000);
+    }
 
-        // Generate canvas from the entire page
-        const canvas = await html2canvas(pageContainer, {
-            scale: 2,
-            useCORS: true,
-            allowTaint: true
-        });
-        
-        const imgData = canvas.toDataURL('image/png');
-        const imgWidth = 210;
-        const pageHeight = 297;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
-        let heightLeft = imgHeight;
-        let position = 0;
-        
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-        
-        while (heightLeft > 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
+    function showSuccessModal() {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+        `;
+        modal.innerHTML = `
+            <div style="
+                background-color: white;
+                padding: 30px;
+                border-radius: 10px;
+                text-align: center;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+                max-width: 400px;
+            ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-8.15"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h3 style="color: #333; margin-bottom: 10px;">¡Descarga Completa!</h3>
+                <p style="color: #666;">El informe ha sido descargado correctamente. 🥳</p>
+                <button onclick="this.closest('[data-modal]').remove()" style="
+                    background-color: #DF1783;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    margin-top: 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                ">Cerrar</button>
+            </div>
+        `;
+        modal.setAttribute('data-modal', true);
+        document.body.appendChild(modal);
+    }
+
+    async function generatePDF() {
+        showNotification('Generando el PDF... por favor, espera.', 'info');
+        try {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pageContainer = document.getElementById('page-container');
+
+            // Temporarily hide/style elements for the screenshot
+            const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
+            elementsToHide.forEach(el => el.style.display = 'none');
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons.forEach(btn => {
+                btn.style.backgroundColor = '#DF1783';
+                btn.style.color = '#FFFFFF';
+            });
+            const ctaBanner = document.querySelector('.cta-banner');
+            if (ctaBanner) ctaBanner.style.display = 'none';
+
+            // Use CSS to force page breaks for sections
+            const style = document.createElement('style');
+            style.setAttribute('data-temp', 'true');
+            style.innerHTML = `
+                .content-section, #main-header {
+                    page-break-before: always;
+                    break-before: page;
+                }
+                .content-section:first-of-type, #main-header:first-of-type {
+                    page-break-before: avoid;
+                    break-before: avoid;
+                }
+            `;
+            document.head.appendChild(style);
+
+            const canvas = await html2canvas(pageContainer, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 210;
+            const pageHeight = 297;
+            const imgHeight = canvas.height * imgWidth / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+
             pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
             heightLeft -= pageHeight;
+
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            pdf.save('Tendencias-Consumo-2025-Bebell-Digital-Solutions.pdf');
+
+            showSuccessModal();
+
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            showNotification('Error: No se pudo generar el PDF.', 'error');
+        } finally {
+            // Restore original state
+            const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
+            elementsToHide.forEach(el => el.style.display = '');
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons.forEach(btn => {
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            });
+            const ctaBanner = document.querySelector('.cta-banner');
+            if (ctaBanner) ctaBanner.style.display = '';
+            const tempStyle = document.querySelector('style[data-temp="true"]');
+            if (tempStyle) tempStyle.remove();
         }
-        
-        pdf.save('Tendencias-Consumo-2025-Bebell-Digital-Solutions.pdf');
-        
-        // Show success modal after saving
-        showSuccessModal();
-
-    } catch (error) {
-        console.error('Error generating PDF:', error);
-        showNotification('Error: No se pudo generar el PDF.', 'error');
-    } finally {
-        // Restore page to original state
-        const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
-        elementsToHide.forEach(el => el.style.display = '');
-        const buttons = document.querySelectorAll('.cta-button');
-        buttons.forEach(btn => {
-            btn.style.backgroundColor = '';
-            btn.style.color = '';
-        });
-        const style = document.querySelector('style[data-temp]');
-        if (style) style.remove();
     }
-}
 </script>
-
-
     
 </body>
 </html>
