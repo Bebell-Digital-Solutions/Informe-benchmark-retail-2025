@@ -97,63 +97,70 @@
             color: var(--text-color);
         }
         
-        .cta-button {
-            display: inline-block;
-            width: 200px;
-            margin: 10px;
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .cta-button:hover {
-            background-color: #b8126a;
-        }
-        
-        .button-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
+      /* Updated Button Styles - Standardized for all buttons */
+.cta-button, .hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 200px;
+    padding: 12px 20px;
+    margin: 10px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
 
-           /* Updated button styles */
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 200px;
-      margin: 10px;
-      padding: 12px;
-      background-color: var(--primary-color);
-      color: var(--white);
-      text-align: center;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
+.cta-button:hover, .hero-button:hover {
+    background-color: #b8126a;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(223, 23, 131, 0.3);
+}
+
+.cta-button svg, .hero-button svg,
+.cta-button i, .hero-button i {
+    width: 1.1em;
+    height: 1.1em;
+    margin-right: 8px;
+    vertical-align: middle;
+    stroke: currentColor;
+}
+
+/* Button container for consistent spacing */
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+    gap: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        align-items: center;
     }
     
-    .cta-button:hover {
-      background-color: #b8126a;
-      color: white !important;
+    .cta-button, .hero-button {
+        width: 100%;
+        max-width: 280px;
     }
-    
-    .cta-button svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-    }
+}
+
+
+
+
+        
         
         #main-footer {
             text-align: center;
@@ -248,40 +255,7 @@
             line-height: 1.7;
         }
         
-        .hero-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 220px;
-            padding: 12px 20px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .hero-button:hover {
-            background-color: #b8126a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(223, 23, 131, 0.3);
-            color: white;
-        }
-        
-        .hero-button i {
-            margin-right: 8px;
-            font-size: 1.1rem;
-              vertical-align: middle;
-        }
-
-        /* For Lucide specifically */
-.hero-button svg {
-  width: 1.1em;
-  height: 1.1em;
-  margin-right: 8px;
-  vertical-align: middle;
-}
+      
         
         @media (max-width: 768px) {
             #hero-card {
@@ -290,7 +264,7 @@
             }
             
             #hero-image img {
-                border-radius: 0;
+                border-radius: 10px;
                 height: 300px;
             }
             
