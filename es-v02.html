@@ -16,6 +16,25 @@
             --white: #fff;
             --black: #000;
         }
+
+.custom-image-widget {
+  position: fixed !important;
+  top: 80px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  right: 0px;
+  z-index: 999;
+}
+
+.custom-image {
+  width: 70px;
+  height: auto;
+  transition: transform 0.2s;
+}
+
+.custom-image-widget:hover .custom-image {
+  transform: scale(1.05);
+}            
         
         body {
             font-family: Arial, sans-serif;
@@ -305,16 +324,117 @@
 .fb-comments span {
     width: 100% !important;
 }
+
+
+
+/* ===== FOOTER ===== */
+.footer {
+padding-top: 30px;
+    background: transparent;
+    text-align: center;
+        color: var(--text-light);
+      font-size: 12px;
+    width: 100%;
+    border-radius: 7px;
+    z-index: 10;
+     margin: 0 auto;
+     max-width: 820px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+    flex-wrap: wrap;
+    padding: 0.25rem;
+}
+
+.social-link {
+    color: var(--text-light);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius);
+    background: var(--card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.social-link:hover {
+    color: var(--text);
+    background: var(--card);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.bebell-footer {
+padding: 20px;
+}
+
+.bebell-footer p {
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+}
+
+.bebell-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.bebell-link:hover {
+    color: var(--primary);
+}
+    
+[data-theme="dark"] .footer {
+    background: inherit;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .social-link {
+    background: var(--card);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .social-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
         
         
     </style>
-
-<div class="fb-comments" data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" data-width="980" data-numposts="10"></div>
-
  
 </head>
 <body>
 
+
+
+        
+         <div class="custom-image-widget" style="position: relative; display: inline-block;"> <!-- ADD THESE STYLES -->
+    <a href="https://bebell-digital-solutions.github.io/vibecoding-toolbox/spanish">
+        <img class="custom-image" 
+             src="https://bucket.mlcdn.com/a/3336/3336910/images/138f14304ea21715dfae64ae5fe1d71b08c2d451.png" 
+             alt="English Translation"
+             style="display: block;"> <!-- Ensure image is block-level -->
+    </a>
+
+</div>
+
+
+
+
+    
 
     <div id="page-container">
         <header id="main-header">
@@ -462,41 +582,71 @@
 
 
 
-
-    <!-- Facebook Comments Section -->
+  <!-- Facebook Comments Section -->
     <section id="comments-section" class="content-section">
         <h2>Comentarios</h2>
         <p>Déjanos tu opinión sobre estas tendencias de consumo</p>
         
-        <!-- Facebook Comments Plugin -->
+        <!-- Official Facebook Comments Widget -->
         <div id="fb-root"></div>
-        <div class="fb-comments-container">
-            <div class="fb-comments" 
-                 data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" 
-                 data-width="100%" 
-                 data-numposts="10"
-                 data-order-by="reverse_time">
-            </div>
-        </div>
+        <div class="fb-comments" 
+             data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" 
+             data-width="100%" 
+             data-numposts="10"
+             data-order-by="reverse_time"></div>
     </section>
 
-    <footer id="main-footer">
-        <!-- Your existing footer content -->
-    </footer>
 
 
 
+            <footer class="mt-8 sm:mt-12 pt-6 sm:pt-8 pb-6 sm:pb-8 border-t border-gray-200 dark:border-slate-700 text-center text-xs sm:text-sm text-gray-500 dark:text-slate-400 px-4">
+                    <div class="flex justify-center flex-wrap gap-x-3 sm:gap-x-4 gap-y-1 mb-2">
+                        <a href="#" class="hover:text-magic-purple dark:hover:text-magic-teal">Privacy Policy</a>
+                        <a href="#" class="hover:text-magic-purple dark:hover:text-magic-teal">Terms of Service</a>
+                    </div>
+ 
+                    
+                       <div class="social-links">
+            <a href="https://bebell-digital-solutions.github.io/checklist-creator/" class="social-link" rel="noopener">
+                <span>☑️</span> Checklist Creator
+            </a>
+            <a href="https://bebell-digital-solutions.github.io/tasks-manager/en-v03" class="social-link" rel="noopener">
+                <span>🎯</span> Tasks Manager
+            </a>
+            <a href="https://bebell-digital-solutions.github.io/bookmark-page/en-v03" class="social-link" rel="noopener">
+                <span>🔗</span> Links Manager
+            </a>
+            <a href="https://bebell-digital-solutions.github.io/magic-toolbox-database/en-v03" class="social-link" rel="noopener">
+                <span>🧰</span> Magic Toolbox
+            </a>
+            <a href="mailto:soporte@bebelldigitalsolutions.com" class="social-link"  rel="noopener">
+                <span>📨</span> Tech Support
+            </a>
+        </div>
+
+    
 
 
+<div class="bebell-footer">
+                 <p><a id="copyrightYear"> © 2024 • All rights reserved.</a>
+            <br>Powered with 💖 by  
+            <a href="https://bebelldigitalsolutions.com" class="bebell-link">
+                Bebell Digital Solutions.
+            </a></p>
+              
 
-
-
-        
-
-        <footer id="main-footer">
-            <p>&copy; 2025 Bebell Digital Solutions. Todos los derechos reservados.</p>
-        </footer>
     </div>
+
+                </footer>
+
+
+
+  <!-- Official Facebook SDK (exactly as provided by Facebook) -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
+    
+
+
+    
 
     <script>
         // Initialize charts when DOM is loaded
@@ -746,28 +896,6 @@
             document.getElementById('downloadPdfBtn').click();
         });
     </script>
-
-
-<script>
-    // Facebook SDK Loader
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId            : '', // Leave empty unless you have a Facebook App ID
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v23.0'
-        });
-    };
-
-    // Load the SDK asynchronously
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
 
 
 
