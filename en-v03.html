@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tendencias de Consumo 2025 - Bebell Digital Solutions</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/f4ee82b1e57d46d38bc15522f71e8f31477026e8.png">  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #DF1783;
+            --secondary-color: #333;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --white: #fff;
+            --black: #000;
+        }
+
+        .custom-image-widget {
+            position: fixed !important;
+            top: 80px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            right: 0px;
+            z-index: 999;
+        }
+
+        .custom-image {
+            width: 70px;
+            height: auto;
+            transition: transform 0.2s;
+        }
+
+        .custom-image-widget:hover .custom-image {
+            transform: scale(1.05);
+        }            
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0 15px;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+        
+        #page-container {
+            padding: 0 25px;
+        }
+        
+        #main-header {
+            position: relative;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            border-radius: 8px;
+        }
+        
+        .content-section {
+            padding: 20px;
+            margin-top: 20px;
+            margin: 20px 0;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: white;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+        }
+        
+        p {
+            margin-bottom: 1em;
+            color: var(--text-color);
+        }
+        
+        /* ===== STANDARDIZED BUTTON STYLES ===== */
+        .cta-button, 
+        .hero-button,
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 200px;
+            padding: 12px 24px;
+            margin: 10px;
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.5;
+        }
+
+        .cta-button:hover, 
+        .hero-button:hover,
+        .download-button:hover {
+            background-color: #b8126a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(223, 23, 131, 0.3);
+        }
+
+        .cta-button svg, 
+        .hero-button svg,
+        .download-button svg,
+        .cta-button i, 
+        .hero-button i,
+        .download-button i {
+            width: 1.1em;
+            height: 1.1em;
+            margin-right: 8px;
+            vertical-align: middle;
+            stroke: currentColor;
+        }
+
+        /* Button container for consistent spacing */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 15px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button, 
+            .hero-button,
+            .download-button {
+                width: 100%;
+                max-width: 280px;
+                margin: 8px 0;
+            }
+        }
+        
+        #main-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .footer {
+            color: white;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        /* Color contrast fixes */
+        a {
+            color: var(--primary-color);
+        }
+        
+        a:hover {
+            color: #b8126a;
+        }
+        
+        dt {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 10px;
+        }
+
+        /* New Hero Card Styles */
+        #hero-card {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 40px auto 40px;
+            max-width: 980px;
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+        
+        #hero-content {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        #hero-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px;
+        }
+        
+        #hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 0 0 20px;
+        }
+        
+        .hero-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0px;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .hero-text {
+            margin-bottom: 30px;
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 768px) {
+            #hero-card {
+                flex-direction: column-reverse;
+                margin-top: 20px;
+            }
+            
+            #hero-image img {
+                border-radius: 10px;
+                height: 300px;
+            }
+            
+            #hero-content {
+                padding: 30px 20px;
+            }
+            
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* YouTube Video Styles */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Floating GIF styles */
+        .floating-gif {
+            position: absolute;
+            top: -30px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-gif img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Facebook Comments Styles */
+        #comments-section {
+            margin-bottom: 40px;
+        }
+
+        .fb-comments-container {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .fb-comments, 
+        .fb-comments iframe[style], 
+        .fb-comments span {
+            width: 100% !important;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding-top: 30px;
+            background: transparent;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 12px;
+            width: 100%;
+            border-radius: 7px;
+            z-index: 10;
+            margin: 0 auto;
+            max-width: 820px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 0;
+            flex-wrap: wrap;
+            padding: 0.25rem;
+        }
+
+        .social-link {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius);
+            background: white;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link:hover {
+            color: var(--text);
+            background: var(--card);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .bebell-footer {
+            padding: 20px;
+        }
+
+        .bebell-footer p {
+            align-items: center;
+            text-align: center;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .bebell-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .bebell-link:hover {
+            color: var(--primary);
+        }
+            
+        [data-theme="dark"] .footer {
+            background: inherit;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .social-link {
+            background: var(--card);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .social-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Video thumbnail styles */
+        .video-thumbnail {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+        }
+        
+        .thumbnail-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+        
+        .play-button svg {
+            color: white;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+        }
+        
+        .video-thumbnail:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        /* Initially hide the iframe */
+        .youtube-iframe {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* When video is loaded */
+        .video-loaded .video-thumbnail {
+            display: none;
+        }
+        
+        .video-loaded .youtube-iframe {
+            display: block;
+        }
+
+
+
+
+
+        /* PDF-specific optimizations */
+        @media print {
+            body {
+                background-color: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 12pt !important;
+                line-height: 1.5 !important;
+            }
+            
+            #page-container {
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
+            .content-section {
+                page-break-after: always;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 0 0 20mm 0 !important;
+                padding: 15mm !important;
+                box-shadow: none !important;
+                border: 1px solid #eee !important;
+                height: 270mm; /* A4 height minus margins */
+                position: relative;
+            }
+            
+            .chart-container {
+                height: 180mm !important;
+                width: 100% !important;
+                margin: 10mm 0 !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            h1, h2, h3 {
+                color: #DF1783 !important;
+            }
+            
+            #main-header {
+                background-color: white !important;
+                color: black !important;
+                border: 2px solid #DF1783 !important;
+                page-break-after: always;
+            }
+            
+            .button-container {
+                position: absolute;
+                bottom: 15mm;
+                left: 0;
+                right: 0;
+                padding: 0 15mm;
+            }
+            
+            .cta-button {
+                background-color: #DF1783 !important;
+                color: white !important;
+                border: none !important;
+                display: inline-block !important;
+                text-decoration: none !important;
+            }
+            
+            /* Hide elements we don't want in PDF */
+            .custom-image-widget,
+            .floating-gif,
+            .fb-comments-container,
+            .video-thumbnail,
+            .social-links {
+                display: none !important;
+            }
+        }
+
+@media print {
+    .content-section, #main-header {
+        page-break-before: always;
+        break-before: page;
+    }
+    
+    .content-section:first-of-type, #main-header:first-of-type {
+        page-break-before: avoid;
+        break-before: avoid;
+    }
+}
+
+        
+        
+    </style>
+</head>
+<body>
+ <div class="custom-image-widget">
+    <a href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/en-v02">
+        <img class="custom-image" 
+             src="https://bucket.mlcdn.com/a/3336/3336910/images/81299ab4b3def01be268d66464324457d20931ac.gif" 
+             alt="Spanish Translation">
+    </a>
+</div>
+
+<div id="page-container">
+    <header id="main-header">
+        <div class="floating-gif">
+            <img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/Badge_Acceso_Premium.gif?v=1755306928" alt="Floating animation">
+        </div>
+        <h1>Consumer Trends in 2025</h1>
+        <p style="color: white;">A detailed analysis for brands, freelancers, and marketing professionals</p>
+    </header>
+
+    <section id="hero-card">
+        <div id="hero-content">
+            <h2 class="hero-title">📊 Exclusive 2025 Report</h2>
+            <h3 class="hero-subtitle">Key data on consumer behavior</h3>
+            <p class="hero-text">Discover the trends transforming the digital marketing and e-commerce landscape in this pivotal year. Our detailed report will provide you with actionable insights for your strategy.</p>
+            <button id="downloadPdfBtn" class="cta-button">
+                <i class="fas fa-download" style="margin-right: 8px;"></i>
+                <span>Download Report</span>
+            </button>
+        </div>
+        <div id="hero-image">
+            <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2e89547509e2abf03176b6b376254de57ba779ae.png" alt="Consumer trends 2025">
+        </div>
+    </section>
+
+    <section id="introduction-section" class="content-section">
+        <h2>📍 Introduction</h2>
+        <p>In the first half of 2025, consumer purchasing behavior has undergone significant changes. Despite an increase in purchasing activity, total spending has shown minimal growth. This report analyzes these changes and offers strategies for brands, freelancers, and professionals to adapt to this new reality.</p>
+        
+        <div class="video-container">
+            <div class="video-thumbnail" onclick="loadVideo(this)">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/3bfe048a1f93910b91db9b06055cdb1cbf7ffa16.gif" alt="Video thumbnail" class="thumbnail-gif">
+                <div class="play-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="#DF1783">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                    </svg>
+                </div>
+            </div>
+            <iframe width="560" height="315" src="about:blank" 
+                    data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen class="youtube-iframe"></iframe>
+        </div>
+    </section>
+
+    <section id="research-section" class="content-section">
+        <h2>1. More Research, Less Spending</h2>
+        <p><strong>Key Finding:</strong> While clicks increased by 18% and orders by 12%, total spending only grew by 0.4%. This indicates that consumers are researching more before purchasing and being more selective with their spending.</p>
+        
+        <div class="chart-container">
+            <canvas id="researchChart"></canvas>
+        </div>
+        
+        <p><strong>Practical Example:</strong> An online technology store observes that while it receives more visits, sales don't increase proportionally. This suggests users are comparing prices and features before making purchasing decisions.</p>
+        <p><strong>Professional Insight:</strong> Brands should focus on providing detailed information and clear comparisons to help consumers in their research process.</p>
+    </section>
+
+    <section id="aov-section" class="content-section">
+        <h2>2. Decrease in Average Order Value (AOV)</h2>
+        <p><strong>Key Finding:</strong> The average order value (AOV) decreased by 10%, indicating consumers are buying more lower-priced products.</p>
+        
+        <div class="chart-container">
+            <canvas id="aovChart"></canvas>
+        </div>
+        
+        <p><strong>Practical Example:</strong> A fashion retailer notices customers are buying more low-cost items rather than investing in higher-priced products. This could reflect a more cautious purchasing strategy.</p>
+        <p><strong>Professional Insight:</strong> Brands should consider offering product bundles or volume discounts to incentivize higher-value purchases.</p>
+    </section>
+
+    <section id="marketing-section" class="content-section">
+        <h2>3. Evolution of Marketing Partnerships</h2>
+        <p><strong>Key Finding:</strong> Loyalty programs have lost order share, while coupon and deal platforms have doubled their participation.</p>
+        
+        <div class="chart-container">
+            <canvas id="marketingChart"></canvas>
+        </div>
+        
+        <p><strong>Practical Example:</strong> A cosmetics brand observes that collaborations with influencers offering discount codes generate more sales than traditional rewards programs.</p>
+        <p><strong>Professional Insight:</strong> It's essential to diversify marketing strategies and explore new forms of collaboration to effectively reach target audiences.</p>
+    </section>
+
+    <section id="categories-section" class="content-section">
+        <h2>4. Purchasing Behavior by Category</h2>
+        <p><strong>Key Finding:</strong> Health, beauty, sports, and home categories have shown an increase in AOV, while electronics has experienced a drop in conversion.</p>
+        
+        <div class="chart-container">
+            <canvas id="categoriesChart"></canvas>
+        </div>
+        
+        <p><strong>Practical Example:</strong> An online sports store notices customers are buying more high-end exercise equipment, while sales of electronic gadgets have decreased.</p>
+        <p><strong>Professional Insight:</strong> It's crucial to adapt marketing strategies according to specific trends in each product category.</p>
+    </section>
+
+    <section id="strategies-section" class="content-section">
+        <h2>5. Strategies to Adapt to New Consumer Behavior</h2>
+        <ul>
+            <li><strong>Implement Multi-Channel Attribution:</strong> Use tools that allow tracking the complete customer journey to better understand their decision process.</li>
+            <li><strong>Diversify Marketing Partnerships:</strong> Collaborate with a variety of partners, including coupon platforms, influencers, and content creators, to expand reach.</li>
+            <li><strong>Leverage Budget Cycles:</strong> Plan marketing campaigns at key times of the year, like January, when consumers are more willing to spend.</li>
+            <li><strong>Adapt Messages by Product Category:</strong> Customize marketing strategies according to the characteristics and purchasing behaviors of each category.</li>
+        </ul>
+    </section>
+
+    <section id="projections-section" class="content-section">
+        <h2>🔎 Future Projections</h2>
+        <p><strong>📌 Next Year (2026):</strong> The trend of prolonged research is expected to continue, with a focus on informed decision-making and price comparison.</p>
+        <p><strong>📌 5 Years (2030):</strong> Influencer marketing and content creator partnerships will dominate the landscape, with greater integration of artificial intelligence in marketing strategies.</p>
+        <p><strong>📌 10 Years (2035):</strong> Augmented and virtual reality will transform the online shopping experience, allowing consumers to virtually try products before purchasing.</p>
+        
+        <div class="chart-container">
+            <canvas id="projectionsChart"></canvas>
+        </div>
+    </section>
+
+    <section id="glossary-section" class="content-section">
+        <h2>📓 Glossary</h2>
+        <dl>
+            <dt>📌 AOV (Average Order Value):</dt>
+            <dd>Average value of each order placed by customers.</dd>
+            <dt>📌 Conversion:</dt>
+            <dd>Process where a visitor completes a desired action, such as a purchase.</dd>
+            <dt>📌 Affiliate Marketing:</dt>
+            <dd>Strategy where a brand rewards partners for generating traffic or sales through their marketing efforts.</dd>
+            <dt>📌 Influencer Marketing:</dt>
+            <dd>Collaboration with influential people to promote products or services.</dd>
+            <dt>📌 Multi-Channel Attribution:</dt>
+            <dd>Method to track and analyze the customer journey across multiple touchpoints before conversion.</dd>
+        </dl>
+    </section>
+
+    <section id="download-section" class="content-section" style="text-align: center;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="text-align: center; margin-bottom: 1rem;">Download the Complete Report</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">To get the full report in PDF format, including interactive charts and detailed examples.</p>
+            
+            <div class="button-container" style="
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+                margin: 0 auto;
+            ">
+                <button id="downloadPdfBtn2" class="cta-button" style="
+                    background: #DF1783;
+                    color: white;
+                    padding: 12px 24px;
+                    border: none;
+                    border-radius: 6px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                ">
+                    <i class="fas fa-download" style="margin-right: 8px;"></i>
+                    Download Report
+                </button>
+                
+                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" 
+                   class="cta-button" 
+                   target="_blank"
+                   style="
+                       background: #DF1783;
+                       color: white;
+                       padding: 12px 24px;
+                       border: none;
+                       border-radius: 6px;
+                       font-weight: 600;
+                       cursor: pointer;
+                       transition: all 0.3s ease;
+                       text-decoration: none;
+                       display: inline-flex;
+                       align-items: center;
+                       justify-content: center;
+                   ">
+                    <i class="fas fa-external-link-alt" style="margin-right: 8px;"></i>
+                    Explore Source
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="comments-section" class="content-section">
+        <h2>Comments</h2>
+        <p>Share your thoughts about these consumer trends</p>
+        
+        <div id="fb-root"></div>
+        <div class="fb-comments" 
+             data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" 
+             data-width="100%" 
+             data-numposts="10"
+             data-order-by="reverse_time"></div>
+
+        <div class="cta-banner" style="
+          background: url('https://bucket.mlcdn.com/a/3336/3336910/images/1d076ad5af4652ef343cfbdc74bc78a58d5f4466.png') center/cover;
+          padding: 3rem 5rem;
+          text-align: center;
+          border-radius: 12px;
+          margin: 50px 0;
+          box-shadow: 0 8px 24px rgba(223, 23, 131, 0.2);
+          position: relative;
+          overflow: hidden;
+          color: white;
+        ">
+          <img src="https://bucket.mlcdn.com/a/3336/3336910/images/80a14e0eaa1e329f06524198044d53e3dcc75d28.png" alt="Trends icon" 
+               style="
+                 width: 150px;
+                 height: 150px;
+                 object-fit: contain;
+               ">
+          
+          <h3 style="
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+          ">
+            Ready to transform these trends into results?
+          </h3>
+          
+          <p style="
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+          ">
+            Our 2025 consumer specialists will help you develop a 
+            <span style="border-bottom: 2px dashed rgba(255,255,255,0.3);">personalized</span> 
+            strategy for your industry with a free 30-minute consultation.
+          </p>
+          
+          <a href="https://bebelldigitalsolutions.com/pages/reservas" class="cta-button" style="
+            background: #DF1783;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #DF1783;
+            box-shadow: 0 4px 12px rgba(223, 23, 131, 0.3);
+          ">
+                  <i class="fas fa-calendar-check" style="margin-right: 10px;"></i> 
+            SCHEDULE FREE CONSULTATION
+          </a>
+          
+          <p style="
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0;
+          ">
+            <img src="https://cdn-icons-png.flaticon.com/512/2889/2889676.png" 
+                 alt="Padlock" 
+                 style="
+                   width: 14px;
+                   height: 14px;
+                   vertical-align: middle;
+                   margin-right: 5px;
+                   filter: brightness(0) invert(1);
+                 ">
+            No commitments • 100% confidential
+          </p>
+        </div>
+    </section>
+
+    <footer class="mt-8 sm:mt-12 pt-6 sm:pt-8 pb-6 sm:pb-8 border-t border-gray-200 dark:border-slate-700 text-center text-xs sm:text-sm text-gray-500 dark:text-slate-400 px-4">
+        <div class="social-links">
+            <a href="https://bebell-digital-solutions.github.io/checklist-creator/" class="social-link" rel="noopener">
+                <span>☑️</span> Checklist Creator
+            </a>
+            <a href="https://bebell-digital-solutions.github.io/tasks-manager/en-v03" class="social-link" rel="noopener">
+                <span>🎯</span> Tasks Manager
+            </a>
+            <a href="https://bebell-digital-solutions.github.io/bookmark-page/en-v03" class="social-link" rel="noopener">
+                <span>🔗</span> Links Manager
+            </a>
+            <a href="https://bebell-digital-solutions.github.io/magic-toolbox-database/en-v03" class="social-link" rel="noopener">
+                <span>🧰</span> Magic Toolbox
+            </a>
+            <a href="mailto:soporte@bebelldigitalsolutions.com" class="social-link"  rel="noopener">
+                <span>📨</span> Tech Support
+            </a>
+        </div>
+
+        <div class="bebell-footer">
+            <p>Copyright <a id="copyrightYear"> © 2024 • All rights reserved.</a>
+            <br>Powered with 💖 by  
+            <a href="https://bebelldigitalsolutions.com" class="bebell-link">
+                Bebell Digital Solutions.
+            </a></p>
+        </div>
+    </footer>
+</div>
+
+
+
+
+
+
+
+   <!-- Official Facebook SDK -->
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
+
+    
+
+
+
+
+
+    
+<script type="module">
+    // Import the confetti library
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+
+    // Global functions and event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        initCharts();
+        setupPDFDownload();
+        lucide.createIcons();
+        updateCopyrightYear();
+    });
+
+    function updateCopyrightYear() {
+        document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
+    }
+
+    // --- 1. CHART INITIALIZATION ---
+    function initCharts() {
+        new Chart(document.getElementById('researchChart').getContext('2d'), getResearchChartConfig());
+        new Chart(document.getElementById('aovChart').getContext('2d'), getAOVChartConfig());
+        new Chart(document.getElementById('marketingChart').getContext('2d'), getMarketingChartConfig());
+        new Chart(document.getElementById('categoriesChart').getContext('2d'), getCategoriesChartConfig());
+        new Chart(document.getElementById('projectionsChart').getContext('2d'), getProjectionsChartConfig());
+    }
+
+    function getResearchChartConfig() {
+        return {
+            type: 'bar',
+            data: {
+                labels: ['Clics', 'Pedidos', 'Gasto Total'],
+                datasets: [{
+                    label: 'Cambio porcentual 2024-2025',
+                    data: [18, 12, 0.4],
+                    backgroundColor: ['rgba(223, 23, 131, 0.7)', 'rgba(223, 23, 131, 0.5)', 'rgba(223, 23, 131, 0.3)'],
+                    borderColor: ['rgba(223, 23, 131, 1)', 'rgba(223, 23, 131, 1)', 'rgba(223, 23, 131, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: getCommonChartOptions({ yTitle: 'Cambio porcentual (%)', title: 'Aumento en actividad vs crecimiento del gasto' })
+        };
+    }
+
+    function getAOVChartConfig() {
+        return {
+            type: 'line',
+            data: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Valor promedio por pedido (AOV)',
+                    data: [120, 115, 110, 108, 107, 105],
+                    fill: false,
+                    backgroundColor: 'rgba(223, 23, 131, 0.7)',
+                    borderColor: 'rgba(223, 23, 131, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: getCommonChartOptions({ yTitle: 'Valor promedio ($)', xTitle: 'Mes del año 2025', title: 'Disminución del valor promedio por pedido', beginAtZero: false })
+        };
+    }
+
+    function getMarketingChartConfig() {
+        return {
+            type: 'doughnut',
+            data: {
+                labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
+                datasets: [{
+                    data: [15, 30, 40, 15],
+                    backgroundColor: ['rgba(223, 23, 131, 0.7)', 'rgba(51, 51, 51, 0.7)', 'rgba(223, 23, 131, 0.5)', 'rgba(51, 51, 51, 0.5)'],
+                    borderColor: ['rgba(223, 23, 131, 1)', 'rgba(51, 51, 51, 1)', 'rgba(223, 23, 131, 1)', 'rgba(51, 51, 51, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Participación en pedidos por tipo de asociación' },
+                    legend: { position: 'bottom' }
+                }
+            }
+        };
+    }
+
+    function getCategoriesChartConfig() {
+        return {
+            type: 'radar',
+            data: {
+                labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
+                datasets: [{
+                    label: 'Cambio en AOV (%)',
+                    data: [12, 8, 15, 5, -10, -2],
+                    backgroundColor: 'rgba(223, 23, 131, 0.2)',
+                    borderColor: 'rgba(223, 23, 131, 1)',
+                    pointBackgroundColor: 'rgba(223, 23, 131, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: -15,
+                        suggestedMax: 20
+                    }
+                },
+                plugins: {
+                    title: { display: true, text: 'Rendimiento por categoría de producto' }
+                }
+            }
+        };
+    }
+
+    function getProjectionsChartConfig() {
+        return {
+            type: 'bar',
+            data: {
+                labels: ['2025', '2026', '2030', '2035'],
+                datasets: [{
+                    label: 'Investigación prolongada',
+                    data: [85, 90, 75, 60],
+                    backgroundColor: 'rgba(223, 23, 131, 0.7)'
+                }, {
+                    label: 'Marketing de influencia',
+                    data: [40, 45, 80, 65],
+                    backgroundColor: 'rgba(51, 51, 51, 0.7)'
+                }, {
+                    label: 'Realidad aumentada',
+                    data: [10, 15, 35, 75],
+                    backgroundColor: 'rgba(223, 23, 131, 0.5)'
+                }]
+            },
+            options: getCommonChartOptions({ yTitle: 'Adopción estimada (%)', title: 'Proyección de tendencias de consumo' })
+        };
+    }
+
+    function getCommonChartOptions({ yTitle, xTitle, title, beginAtZero = true }) {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: beginAtZero, title: { display: true, text: yTitle } },
+                ...(xTitle && { x: { title: { display: true, text: xTitle } } })
+            },
+            plugins: { title: { display: true, text: title } }
+        };
+    }
+
+    // --- 2. VIDEO LAZY LOAD ---
+    function loadVideo(thumbnail) {
+        const container = thumbnail.parentElement;
+        const iframe = container.querySelector('.youtube-iframe');
+        iframe.src = iframe.dataset.src;
+        container.classList.add('video-loaded');
+        console.log('Video playback started');
+    }
+
+    // --- 3. BACK TO TOP ICON ---
+    document.addEventListener("DOMContentLoaded", function () {
+        const backToTop = document.createElement("div");
+        backToTop.id = "back-to-top";
+        backToTop.style.position = "fixed";
+        backToTop.style.bottom = "20px";
+        backToTop.style.right = "20px";
+        backToTop.style.display = "none";
+        backToTop.style.cursor = "pointer";
+        backToTop.style.zIndex = "9999";
+        const backToTopImg = document.createElement("img");
+        backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/29840e122b950f88fdca23072015101b427a9112.png";
+        backToTopImg.alt = "Volver arriba";
+        backToTopImg.style.width = "40px";
+        backToTopImg.style.height = "40px";
+        backToTop.appendChild(backToTopImg);
+        document.body.appendChild(backToTop);
+        window.addEventListener("scroll", function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        });
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    // --- 4. PDF DOWNLOAD & NOTIFICATIONS ---
+    function setupPDFDownload() {
+        document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
+        document.getElementById('downloadPdfBtn2').addEventListener('click', generatePDF);
+    }
+
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: ${type === 'success' ? '#4CAF50' : type === 'info' ? '#2196F3' : '#F44336'};
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
+        `;
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.addEventListener('transitionend', () => notification.remove());
+        }, 3000);
+    }
+
+    function showSuccessModal() {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+        `;
+        modal.innerHTML = `
+            <div style="
+                background-color: white;
+                padding: 30px;
+                border-radius: 10px;
+                text-align: center;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+                max-width: 400px;
+            ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-8.15"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h3 style="color: #333; margin-bottom: 10px;">¡Descarga Completa!</h3>
+                <p style="color: #666;">El informe ha sido descargado correctamente. 🥳</p>
+                <button onclick="this.closest('[data-modal]').remove()" style="
+                    background-color: #DF1783;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    margin-top: 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                ">Cerrar</button>
+            </div>
+        `;
+        modal.setAttribute('data-modal', true);
+        document.body.appendChild(modal);
+        
+        // This is the new line to trigger the confetti
+        confetti({
+            particleCount: 200,
+            spread: 150,
+            origin: { x: 0.5, y: 0.5 }
+        });
+    }
+
+    async function generatePDF() {
+        showNotification('Generando el PDF... por favor, espera.', 'info');
+        try {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pageContainer = document.getElementById('page-container');
+
+            // Temporarily hide/style elements for the screenshot
+            const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
+            elementsToHide.forEach(el => el.style.display = 'none');
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons.forEach(btn => {
+                btn.style.backgroundColor = '#DF1783';
+                btn.style.color = '#FFFFFF';
+            });
+
+            // Use CSS to force page breaks for sections
+            const style = document.createElement('style');
+            style.setAttribute('data-temp', 'true');
+            style.innerHTML = `
+                .content-section, #main-header {
+                    page-break-before: always;
+                    break-before: page;
+                }
+                .content-section:first-of-type, #main-header:first-of-type {
+                    page-break-before: avoid;
+                    break-before: avoid;
+                }
+            `;
+            document.head.appendChild(style);
+
+            const canvas = await html2canvas(pageContainer, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 210;
+            const pageHeight = 297;
+            const imgHeight = canvas.height * imgWidth / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            pdf.save('Tendencias-Consumo-2025-Bebell-Digital-Solutions.pdf');
+
+            showSuccessModal();
+
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            showNotification('Error: No se pudo generar el PDF.', 'error');
+        } finally {
+            // Restore original state
+            const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
+            elementsToHide.forEach(el => el.style.display = '');
+            const buttons = document.querySelectorAll('.cta-button');
+            buttons.forEach(btn => {
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            });
+            const tempStyle = document.querySelector('style[data-temp="true"]');
+            if (tempStyle) tempStyle.remove();
+        }
+    }
+</script>
+    
+</body>
+</html>
