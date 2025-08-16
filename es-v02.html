@@ -33,6 +33,7 @@
         }
         
         #main-header {
+            position: relative;
             background-color: var(--primary-color);
             color: var(--white);
             padding: 20px;
@@ -100,8 +101,12 @@
             text-align: center;
             padding: 20px;
             background-color: var(--secondary-color);
-            color: var(--white);
+            color: white;
             margin-top: 20px;
+        }
+
+        .footer {
+            color: white;
         }
         
         .chart-container {
@@ -236,6 +241,27 @@
 
 
 
+        /* YouTube Video Styles */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    margin: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+
 /* Floating GIF styles */
 .floating-gif {
     position: absolute;
@@ -260,17 +286,32 @@
     100% { transform: translateY(0px); }
 }
 
-/* Make sure the header has relative positioning */
-#main-header {
-    position: relative;
-    /* Your existing header styles... */
+
+/* Facebook Comments Styles */
+#comments-section {
+    margin-bottom: 40px;
 }
 
+.fb-comments-container {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-
+.fb-comments, 
+.fb-comments iframe[style], 
+.fb-comments span {
+    width: 100% !important;
+}
         
         
     </style>
+
+<div class="fb-comments" data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" data-width="980" data-numposts="10"></div>
+
+ 
 </head>
 <body>
 
@@ -300,12 +341,27 @@
             </div>
         </section>
 
-        
 
-        <section id="introduction-section" class="content-section">
-            <h2>Introducción</h2>
-            <p>En la primera mitad de 2025, el comportamiento de compra de los consumidores ha experimentado cambios significativos. A pesar de un aumento en la actividad de compra, el gasto total ha mostrado un crecimiento mínimo. Este informe analiza estos cambios y ofrece estrategias para que marcas, freelancers y profesionales se adapten a esta nueva realidad.</p>
-        </section>
+
+
+        
+        
+<section id="introduction-section" class="content-section">
+    <h2>Introducción</h2>
+    <p>En la primera mitad de 2025, el comportamiento de compra de los consumidores ha experimentado cambios significativos. A pesar de un aumento en la actividad de compra, el gasto total ha mostrado un crecimiento mínimo. Este informe analiza estos cambios y ofrece estrategias para que marcas, freelancers y profesionales se adapten a esta nueva realidad.</p>
+    
+    <!-- YouTube Video Embed -->
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+    </div>
+</section>
+
+
+
+        
 
         <section id="research-section" class="content-section">
             <h2>1. Mayor Investigación, Menor Gasto</h2>
@@ -392,6 +448,8 @@
             </dl>
         </section>
 
+
+
         <section id="download-section" class="content-section">
             <h2>Descarga el Informe Completo</h2>
             <p>Para obtener el informe completo en formato PDF, incluyendo gráficos interactivos y ejemplos detallados.</p>
@@ -401,6 +459,39 @@
                 <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">Más Recursos</a>
             </div>
         </section>
+
+
+
+
+    <!-- Facebook Comments Section -->
+    <section id="comments-section" class="content-section">
+        <h2>Comentarios</h2>
+        <p>Déjanos tu opinión sobre estas tendencias de consumo</p>
+        
+        <!-- Facebook Comments Plugin -->
+        <div id="fb-root"></div>
+        <div class="fb-comments-container">
+            <div class="fb-comments" 
+                 data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" 
+                 data-width="100%" 
+                 data-numposts="10"
+                 data-order-by="reverse_time">
+            </div>
+        </div>
+    </section>
+
+    <footer id="main-footer">
+        <!-- Your existing footer content -->
+    </footer>
+
+
+
+
+
+
+
+
+        
 
         <footer id="main-footer">
             <p>&copy; 2025 Bebell Digital Solutions. Todos los derechos reservados.</p>
@@ -655,5 +746,31 @@
             document.getElementById('downloadPdfBtn').click();
         });
     </script>
+
+
+<script>
+    // Facebook SDK Loader
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId            : '', // Leave empty unless you have a Facebook App ID
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v23.0'
+        });
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+    
 </body>
 </html>
