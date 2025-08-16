@@ -235,6 +235,40 @@
         }
 
 
+
+/* Floating GIF styles */
+.floating-gif {
+    position: absolute;
+    top: -30px; /* Adjust this to position vertically */
+    right: 20px; /* Adjust this to position horizontally */
+    width: 150px;
+    height: 150px;
+    z-index: 100;
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Floating animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Make sure the header has relative positioning */
+#main-header {
+    position: relative;
+    /* Your existing header styles... */
+}
+
+
+
+        
         
     </style>
 </head>
