@@ -484,40 +484,86 @@
             display: block;
         }
 
-        /* PDF-specific styles */
+
+
+
+
+        /* PDF-specific optimizations */
         @media print {
             body {
-                background-color: white;
-                color: black;
-                padding: 0;
-                margin: 0;
+                background-color: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 12pt !important;
+                line-height: 1.5 !important;
             }
+            
+            #page-container {
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
             .content-section {
+                page-break-after: always;
                 page-break-inside: avoid;
                 break-inside: avoid;
-                margin: 20px 0;
-                padding: 15px;
-                box-shadow: none;
-                border: 1px solid #eee;
+                margin: 0 0 20mm 0 !important;
+                padding: 15mm !important;
+                box-shadow: none !important;
+                border: 1px solid #eee !important;
+                height: 270mm; /* A4 height minus margins */
+                position: relative;
             }
+            
             .chart-container {
-                height: 300px;
-                margin: 20px auto;
+                height: 180mm !important;
+                width: 100% !important;
+                margin: 10mm 0 !important;
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
+            
+            h1, h2, h3 {
+                color: #DF1783 !important;
+            }
+            
             #main-header {
-                color: black;
-                background-color: white;
-                border: 2px solid var(--primary-color);
+                background-color: white !important;
+                color: black !important;
+                border: 2px solid #DF1783 !important;
+                page-break-after: always;
             }
-            h1 {
-                color: var(--primary-color);
+            
+            .button-container {
+                position: absolute;
+                bottom: 15mm;
+                left: 0;
+                right: 0;
+                padding: 0 15mm;
             }
-            .button-container, .custom-image-widget, .floating-gif {
+            
+            .cta-button {
+                background-color: #DF1783 !important;
+                color: white !important;
+                border: none !important;
+                display: inline-block !important;
+                text-decoration: none !important;
+            }
+            
+            /* Hide elements we don't want in PDF */
+            .custom-image-widget,
+            .floating-gif,
+            .fb-comments-container,
+            .video-thumbnail,
+            .social-links {
                 display: none !important;
             }
         }
+
+
+        
     </style>
 </head>
 <body>
@@ -1004,58 +1050,155 @@
             // Add the clone to the body temporarily
             document.body.appendChild(clone);
             
-            // Generate the PDF
-            const canvas = await html2canvas(clone, {
-                scale: 2,
-                logging: false,
-                useCORS: true,
-                allowTaint: true
+            
+             async function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const margin = 15; // mm
+            const pageWidth = pdf.internal.pageSize.getWidth() - (margin * 2);
+            
+            // Create a clone of the content to modify for PDF
+            const element = document.getElementById('page-container');
+            const clone = element.cloneNode(true);
+            
+            // Prepare the clone for PDF
+            clone.style.width = pageWidth + 'mm';
+            clone.style.padding = '0';
+            clone.style.margin = '0';
+            
+            // Add PDF-specific styles
+            const style = document.createElement('style');
+            style.innerHTML = `
+                body { 
+                    font-family: Arial; 
+                    line-height: 1.5; 
+                    font-size: 12pt; 
+                    background-color: white !important;
+                    color: black !important;
+                }
+                .content-section { 
+                    page-break-after: always;
+                    page-break-inside: avoid;
+                    break-inside: avoid;
+                    margin: 0 0 20mm 0 !important;
+                    padding: 15mm !important;
+                    box-shadow: none !important;
+                    border: 1px solid #eee !important;
+                    height: 270mm;
+                    position: relative;
+                }
+                .chart-container { 
+                    height: 180mm !important;
+                    width: 100% !important;
+                    margin: 10mm 0 !important;
+                }
+                h1, h2, h3 { color: #DF1783 !important; }
+                #main-header { 
+                    background-color: white !important; 
+                    color: black !important; 
+                    border: 2px solid #DF1783 !important;
+                    page-break-after: always;
+                }
+                .button-container {
+                    position: absolute;
+                    bottom: 15mm;
+                    left: 0;
+                    right: 0;
+                    padding: 0 15mm;
+                }
+                .cta-button {
+                    background-color: #DF1783 !important;
+                    color: white !important;
+                    border: none !important;
+                    display: inline-block !important;
+                    text-decoration: none !important;
+                }
+                /* Hide elements we don't want in PDF */
+                .custom-image-widget,
+                .floating-gif,
+                .fb-comments-container,
+                .video-thumbnail,
+                .social-links {
+                    display: none !important;
+                }
+            `;
+            clone.prepend(style);
+            
+            // Process buttons to make them PDF-friendly
+            clone.querySelectorAll('.cta-button').forEach(button => {
+                // Convert buttons to links that look like buttons
+                const link = document.createElement('a');
+                link.href = button.id === 'downloadPdfBtn2' ? '#' : button.getAttribute('data-href') || '#';
+                link.className = button.className;
+                link.innerHTML = button.innerHTML;
+                link.style.display = 'inline-block';
+                link.style.margin = '5mm';
+                button.parentNode.replaceChild(link, button);
             });
             
-            const imgWidth = pageWidth;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            // Add the clone to the body temporarily
+            const pdfContainer = document.createElement('div');
+            pdfContainer.style.position = 'absolute';
+            pdfContainer.style.left = '-9999px';
+            pdfContainer.appendChild(clone);
+            document.body.appendChild(pdfContainer);
             
-            // Add pages to PDF
-            const pageHeight = pdf.internal.pageSize.getHeight() - (margin * 2);
-            let heightLeft = imgHeight;
-            let position = margin;
-            let pageCount = 1;
-            
-            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-            
-            while (heightLeft >= 0) {
-                pdf.addPage();
-                position = heightLeft - imgHeight + margin;
-                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-                pageCount++;
+            try {
+                // Generate PDF pages one by one for better quality
+                const sections = clone.querySelectorAll('.content-section, #main-header');
+                
+                for (let i = 0; i < sections.length; i++) {
+                    const section = sections[i];
+                    
+                    // Create a container for each section
+                    const sectionContainer = document.createElement('div');
+                    sectionContainer.style.width = pageWidth + 'mm';
+                    sectionContainer.style.padding = '0';
+                    sectionContainer.style.margin = '0';
+                    sectionContainer.appendChild(section.cloneNode(true));
+                    
+                    // Generate canvas for this section
+                    const canvas = await html2canvas(sectionContainer, {
+                        scale: 3, // Higher scale for better quality
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#FFFFFF'
+                    });
+                    
+                    // Add to PDF
+                    const imgData = canvas.toDataURL('image/png');
+                    const imgWidth = pageWidth;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                    
+                    if (i > 0) pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight);
+                }
+                
+                // Add page numbers
+                const pageCount = pdf.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    pdf.setPage(i);
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(150);
+                    pdf.text(
+                        `Página ${i} de ${pageCount}`,
+                        pdf.internal.pageSize.getWidth() - margin,
+                        pdf.internal.pageSize.getHeight() - 10,
+                        { align: 'right' }
+                    );
+                }
+                
+                // Save the PDF
+                pdf.save('Tendencias-Consumo-2025-Bebell-Optimized.pdf');
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+            } finally {
+                // Clean up
+                document.body.removeChild(pdfContainer);
             }
-            
-            // Add page numbers
-            for (let i = 1; i <= pageCount; i++) {
-                pdf.setPage(i);
-                pdf.setFontSize(10);
-                pdf.setTextColor(150);
-                pdf.text(
-                    `Página ${i} de ${pageCount}`,
-                    pdf.internal.pageSize.getWidth() - margin,
-                    pdf.internal.pageSize.getHeight() - 10,
-                    { align: 'right' }
-                );
-            }
-            
-            // Remove the clone
-            document.body.removeChild(clone);
-            
-            // Save the PDF
-            pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
         }
-    </script>
 
-    <!-- Lucide Icons Initialization -->
-    <script>
-        lucide.createIcons();
-    </script>
+            </script>
 </body>
 </html>
