@@ -460,6 +460,7 @@
     }
     
     .play-button svg {
+        color: white;
         filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
     }
     
@@ -812,6 +813,9 @@ document.addEventListener("DOMContentLoaded", function () {
     initCharts();
     setupPDFDownload();
     lucide.createIcons();
+    
+    // Update copyright year
+    document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
   });
 
   // 1. CHART INITIALIZATION
@@ -1004,96 +1008,105 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  // 2. PDF DOWNLOAD FUNCTIONALITY
+  // 2. PDF DOWNLOAD FUNCTIONALITY - UPDATED VERSION
   function setupPDFDownload() {
-    document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
-    document.getElementById('hero-download-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('downloadPdfBtn').click();
-    });
+    const downloadBtn = document.getElementById('downloadPdfBtn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', generatePDF);
+    }
   }
 
   async function generatePDF() {
-    const { jsPDF } = window.jspdf;
-    const element = document.getElementById('page-container');
-    const clone = element.cloneNode(true);
-    prepareContentForPDF(clone);
-    
-    const canvas = await html2canvas(clone, {
-      scale: 2,
-      logging: false,
-      useCORS: true,
-      allowTaint: true
-    });
-    
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const margin = 20;
-    const pageWidth = pdf.internal.pageSize.getWidth() - (margin * 2);
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
-    addPagesToPDF(pdf, canvas, margin, imgWidth, imgHeight);
-    addPageNumbers(pdf, margin);
-    
-    pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
-    clone.remove();
-  }
-
-  function prepareContentForPDF(clone) {
-    clone.querySelectorAll('.video-container, .fb-comments-container, .custom-image-widget')
-       .forEach(el => el.remove());
-    
-    const style = document.createElement('style');
-    style.innerHTML = `
-      body { font-family: Arial; line-height: 1.5; }
-      .content-section, .chart-container { page-break-inside: avoid; }
-      img { max-width: 100%; height: auto; }
-      a { color: #DF1783; text-decoration: underline; }
-    `;
-    clone.prepend(style);
-    clone.style.width = '100%';
-    clone.style.padding = '0';
-    clone.style.margin = '0';
-  }
-
-  function addPagesToPDF(pdf, canvas, margin, imgWidth, imgHeight) {
-    const pageHeight = pdf.internal.pageSize.getHeight() - (margin * 2);
-    let heightLeft = imgHeight;
-    let position = margin;
-    let pageCount = 1;
-    
-    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-    
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight + margin;
-      pdf.addPage();
-      pageCount++;
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-  }
-
-  function addPageNumbers(pdf, margin) {
-    const pageCount = pdf.internal.getNumberOfPages();
-    for (let i = 1; i <= pageCount; i++) {
-      pdf.setPage(i);
-      pdf.setFontSize(10);
-      pdf.setTextColor(150);
-      pdf.text(
-        `Página ${i} de ${pageCount}`,
-        pdf.internal.pageSize.getWidth() - margin,
-        pdf.internal.pageSize.getHeight() - 10,
-        { align: 'right' }
-      );
+    try {
+      // Show loading state
+      const downloadBtn = document.getElementById('downloadPdfBtn');
+      const originalText = downloadBtn.innerHTML;
+      downloadBtn.innerHTML = '<i data-lucide="loader-circle" class="animate-spin"></i> <span>Generando PDF...</span>';
+      lucide.createIcons();
+      
+      // Wait for libraries to be fully loaded
+      if (typeof jsPDF === 'undefined' || typeof html2canvas === 'undefined') {
+        throw new Error('Required libraries not loaded');
+      }
+      
+      const { jsPDF } = window.jspdf;
+      const element = document.getElementById('page-container');
+      
+      // Clone the element to avoid modifying the original
+      const clone = element.cloneNode(true);
+      clone.style.width = '980px';
+      clone.style.margin = '0 auto';
+      clone.style.padding = '0';
+      document.body.appendChild(clone);
+      
+      // Remove elements we don't want in the PDF
+      clone.querySelectorAll('.video-container, .fb-comments-container, .custom-image-widget, .floating-gif, .button-container, #comments-section, .footer, #main-footer')
+         .forEach(el => el.remove());
+      
+      // Add styles for PDF
+      const style = document.createElement('style');
+      style.innerHTML = `
+        body { font-family: Arial; line-height: 1.5; }
+        .content-section, .chart-container { page-break-inside: avoid; }
+        img { max-width: 100%; height: auto; }
+        a { color: #DF1783; text-decoration: underline; }
+        #hero-card { margin-bottom: 20px; }
+      `;
+      clone.prepend(style);
+      
+      // Generate PDF
+      const pdf = new jsPDF('p', 'pt', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      
+      // Use html2canvas to capture the content
+      const canvas = await html2canvas(clone, {
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        scrollY: -window.scrollY
+      });
+      
+      // Calculate image dimensions to fit PDF page
+      const imgData = canvas.toDataURL('image/png');
+      const imgWidth = pdfWidth - 40; // margin of 20px on each side
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      // Add image to PDF
+      pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+      
+      // Add page numbers
+      const totalPages = pdf.internal.getNumberOfPages();
+      for (let i = 1; i <= totalPages; i++) {
+        pdf.setPage(i);
+        pdf.setFontSize(10);
+        pdf.setTextColor(150);
+        pdf.text(
+          `Página ${i} de ${totalPages}`,
+          pdfWidth - 40,
+          pdfHeight - 20,
+          { align: 'right' }
+        );
+      }
+      
+      // Save the PDF
+      pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
+      
+      // Clean up
+      clone.remove();
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error al generar el PDF. Por favor, inténtelo de nuevo.');
+    } finally {
+      // Restore button state
+      if (downloadBtn) {
+        downloadBtn.innerHTML = originalText;
+        lucide.createIcons();
+      }
     }
   }
 </script>
 
-<!-- Lucide Icons Initialization -->
-<script>
-  lucide.createIcons();
-</script>
-    
 </body>
 </html>
