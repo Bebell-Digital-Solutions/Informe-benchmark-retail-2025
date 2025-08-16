@@ -4,585 +4,575 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tendencias de Consumo 2025 - Bebell Digital Solutions</title>
-  <!-- Libraries must be loaded first -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/f4ee82b1e57d46d38bc15522f71e8f31477026e8.png">  
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     
-  <style>
-    :root {
-        --primary-color: #DF1783;
-        --secondary-color: #333;
-        --background-color: #f4f4f4;
-        --text-color: #333;
-        --white: #fff;
-        --black: #000;
-    }
+    <style>
+        :root {
+            --primary-color: #DF1783;
+            --secondary-color: #333;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --white: #fff;
+            --black: #000;
+        }
 
-    .custom-image-widget {
-        position: fixed !important;
-        top: 80px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        right: 0px;
-        z-index: 999;
-    }
+        .custom-image-widget {
+            position: fixed !important;
+            top: 80px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            right: 0px;
+            z-index: 999;
+        }
 
-    .custom-image {
-        width: 70px;
-        height: auto;
-        transition: transform 0.2s;
-    }
+        .custom-image {
+            width: 70px;
+            height: auto;
+            transition: transform 0.2s;
+        }
 
-    .custom-image-widget:hover .custom-image {
-        transform: scale(1.05);
-    }            
-    
-    body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        margin: 0;
-        padding: 0 15px;
-        max-width: 980px;
-        margin: 0 auto;
-    }
-    
-    #page-container {
-        padding: 0 25px;
-    }
-    
-    #main-header {
-        position: relative;
-        background-color: var(--primary-color);
-        color: var(--white);
-        padding: 20px;
-        text-align: center;
-        margin-bottom: 50px;
-        margin-top: 50px;
-        border-radius: 8px;
-    }
-    
-    .content-section {
-        padding: 20px;
-        margin-top: 20px;
-        margin: 20px 0;
-        background-color: var(--white);
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        color: white;
-    }
-    
-    h2 {
-        color: var(--primary-color);
-    }
-    
-    h3 {
-        color: var(--secondary-color);
-    }
-    
-    p {
-        margin-bottom: 1em;
-        color: var(--text-color);
-    }
-    
-    /* ===== STANDARDIZED BUTTON STYLES ===== */
-    .cta-button, 
-    .hero-button,
-    .download-button { /* Add any other button classes here */
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        min-width: 200px;
-        padding: 12px 24px;
-        margin: 10px;
-        background-color: var(--primary-color);
-        color: var(--white) !important;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 1rem;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        line-height: 1.5;
-    }
-
-    .cta-button:hover, 
-    .hero-button:hover,
-    .download-button:hover {
-        background-color: #b8126a;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(223, 23, 131, 0.3);
-    }
-
-    .cta-button svg, 
-    .hero-button svg,
-    .download-button svg,
-    .cta-button i, 
-    .hero-button i,
-    .download-button i {
-        width: 1.1em;
-        height: 1.1em;
-        margin-right: 8px;
-        vertical-align: middle;
-        stroke: currentColor;
-    }
-
-    /* Button container for consistent spacing */
-    .button-container {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 30px 0;
-        gap: 15px;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .button-container {
-            flex-direction: column;
-            align-items: center;
+        .custom-image-widget:hover .custom-image {
+            transform: scale(1.05);
+        }            
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0 15px;
+            max-width: 980px;
+            margin: 0 auto;
         }
         
+        #page-container {
+            padding: 0 25px;
+        }
+        
+        #main-header {
+            position: relative;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            border-radius: 8px;
+        }
+        
+        .content-section {
+            padding: 20px;
+            margin-top: 20px;
+            margin: 20px 0;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: white;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+        }
+        
+        p {
+            margin-bottom: 1em;
+            color: var(--text-color);
+        }
+        
+        /* ===== STANDARDIZED BUTTON STYLES ===== */
         .cta-button, 
         .hero-button,
         .download-button {
-            width: 100%;
-            max-width: 280px;
-            margin: 8px 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 200px;
+            padding: 12px 24px;
+            margin: 10px;
+            background-color: var(--primary-color);
+            color: var(--white) !important;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.5;
         }
-    }
-    
-    #main-footer {
-        text-align: center;
-        padding: 20px;
-        background-color: var(--secondary-color);
-        color: white;
-        margin-top: 20px;
-    }
 
-    .footer {
-        color: white;
-    }
-    
-    .chart-container {
-        position: relative;
-        height: 400px;
-        margin: 30px 0;
-        padding: 20px;
-    }
-    
-    /* Color contrast fixes */
-    a {
-        color: var(--primary-color);
-    }
-    
-    a:hover {
-        color: #b8126a;
-    }
-    
-    dt {
-        font-weight: bold;
-        color: var(--primary-color);
-        margin-top: 10px;
-    }
+        .cta-button:hover, 
+        .hero-button:hover,
+        .download-button:hover {
+            background-color: #b8126a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(223, 23, 131, 0.3);
+        }
 
-    /* New Hero Card Styles */
-    #hero-card {
-        display: flex;
-        flex-wrap: wrap;
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        margin: 40px auto 40px;
-        max-width: 980px;
-        overflow: hidden;
-        position: relative;
-        z-index: 10;
-    }
-    
-    #hero-content {
-        flex: 1;
-        min-width: 300px;
-        padding: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    #hero-image {
-        flex: 1;
-        min-width: 300px;
-        position: relative;
-        overflow: hidden;
-        margin: 20px;
-    }
-    
-    #hero-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 0 0 0 20px;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-        color: var(--primary-color);
-        margin-bottom: 0px;
-        font-weight: 700;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.25rem;
-        color: var(--secondary-color);
-        margin-bottom: 10px;
-        font-weight: 600;
-    }
-    
-    .hero-text {
-        margin-bottom: 30px;
-        color: var(--text-color);
-        line-height: 1.7;
-    }
-    
-    @media (max-width: 768px) {
-        #hero-card {
-            flex-direction: column-reverse;
-            margin-top: 20px;
+        .cta-button svg, 
+        .hero-button svg,
+        .download-button svg,
+        .cta-button i, 
+        .hero-button i,
+        .download-button i {
+            width: 1.1em;
+            height: 1.1em;
+            margin-right: 8px;
+            vertical-align: middle;
+            stroke: currentColor;
+        }
+
+        /* Button container for consistent spacing */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 15px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button, 
+            .hero-button,
+            .download-button {
+                width: 100%;
+                max-width: 280px;
+                margin: 8px 0;
+            }
         }
         
-        #hero-image img {
-            border-radius: 10px;
-            height: 300px;
+        #main-footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .footer {
+            color: white;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        /* Color contrast fixes */
+        a {
+            color: var(--primary-color);
+        }
+        
+        a:hover {
+            color: #b8126a;
+        }
+        
+        dt {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 10px;
+        }
+
+        /* New Hero Card Styles */
+        #hero-card {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 40px auto 40px;
+            max-width: 980px;
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
         }
         
         #hero-content {
-            padding: 30px 20px;
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        #hero-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px;
+        }
+        
+        #hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0 0 0 20px;
         }
         
         .hero-title {
-            font-size: 1.7rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0px;
+            font-weight: 700;
         }
         
         .hero-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
         }
-    }
-
-    /* YouTube Video Styles */
-    .video-container {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-        height: 0;
-        overflow: hidden;
-        margin: 30px 0;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
-    /* Floating GIF styles */
-    .floating-gif {
-        position: absolute;
-        top: -30px;
-        right: 20px;
-        width: 150px;
-        height: 150px;
-        z-index: 100;
-        animation: float 3s ease-in-out infinite;
-    }
-
-    .floating-gif img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-
-    /* Floating animation */
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-    }
-
-    /* Facebook Comments Styles */
-    #comments-section {
-        margin-bottom: 40px;
-    }
-
-    .fb-comments-container {
-        margin-top: 20px;
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .fb-comments, 
-    .fb-comments iframe[style], 
-    .fb-comments span {
-        width: 100% !important;
-    }
-
-    /* ===== FOOTER ===== */
-    .footer {
-        padding-top: 30px;
-        background: transparent;
-        text-align: center;
-        color: var(--text-light);
-        font-size: 12px;
-        width: 100%;
-        border-radius: 7px;
-        z-index: 10;
-        margin: 0 auto;
-        max-width: 820px;
-    }
-
-    .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin: 0;
-        flex-wrap: wrap;
-        padding: 0.25rem;
-    }
-
-    .social-link {
-        color: var(--text-light);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-        padding: 0.35rem 0.75rem;
-        border-radius: var(--radius);
-        background: white;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        transition: all 0.3s ease;
-        font-size: 0.85rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .social-link:hover {
-        color: var(--text);
-        background: var(--card);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .bebell-footer {
-        padding: 20px;
-    }
-
-    .bebell-footer p {
-        align-items: center;
-        text-align: center;
-        font-size: 12px;
-        margin: 0;
-    }
-
-    .bebell-link {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .bebell-link:hover {
-        color: var(--primary);
-    }
         
-    [data-theme="dark"] .footer {
-        background: inherit;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-    }
+        .hero-text {
+            margin-bottom: 30px;
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 768px) {
+            #hero-card {
+                flex-direction: column-reverse;
+                margin-top: 20px;
+            }
+            
+            #hero-image img {
+                border-radius: 10px;
+                height: 300px;
+            }
+            
+            #hero-content {
+                padding: 30px 20px;
+            }
+            
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+        }
 
-    [data-theme="dark"] .social-link {
-        background: var(--card);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+        /* YouTube Video Styles */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-    [data-theme="dark"] .social-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
+        /* Floating GIF styles */
+        .floating-gif {
+            position: absolute;
+            top: -30px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
 
-  /* Video thumbnail styles */
-    .video-thumbnail {
-        position: relative;
-        cursor: pointer;
-        width: 100%;
-        height: 0;
-        padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        overflow: hidden;
-    }
-    
-    .thumbnail-gif {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    .play-button {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0.9;
-        transition: transform 0.3s ease;
-    }
-    
-    .play-button svg {
-        color: white;
-        filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
-    }
-    
-    .video-thumbnail:hover .play-button {
-        transform: translate(-50%, -50%) scale(1.1);
-    }
-    
-    /* Initially hide the iframe */
-    .youtube-iframe {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    
-    /* When video is loaded */
-    .video-loaded .video-thumbnail {
-        display: none;
-    }
-    
-    .video-loaded .youtube-iframe {
-        display: block;
-    }
+        .floating-gif img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
 
+        /* Facebook Comments Styles */
+        #comments-section {
+            margin-bottom: 40px;
+        }
 
+        .fb-comments-container {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
+        .fb-comments, 
+        .fb-comments iframe[style], 
+        .fb-comments span {
+            width: 100% !important;
+        }
 
+        /* ===== FOOTER ===== */
+        .footer {
+            padding-top: 30px;
+            background: transparent;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 12px;
+            width: 100%;
+            border-radius: 7px;
+            z-index: 10;
+            margin: 0 auto;
+            max-width: 820px;
+        }
 
-      
-</style>
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 0;
+            flex-wrap: wrap;
+            padding: 0.25rem;
+        }
 
+        .social-link {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius);
+            background: white;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
+        .social-link:hover {
+            color: var(--text);
+            background: var(--card);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
 
+        .bebell-footer {
+            padding: 20px;
+        }
 
-    
+        .bebell-footer p {
+            align-items: center;
+            text-align: center;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .bebell-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .bebell-link:hover {
+            color: var(--primary);
+        }
+            
+        [data-theme="dark"] .footer {
+            background: inherit;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .social-link {
+            background: var(--card);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .social-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Video thumbnail styles */
+        .video-thumbnail {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+        }
+        
+        .thumbnail-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.9;
+            transition: transform 0.3s ease;
+        }
+        
+        .play-button svg {
+            color: white;
+            filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+        }
+        
+        .video-thumbnail:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        /* Initially hide the iframe */
+        .youtube-iframe {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* When video is loaded */
+        .video-loaded .video-thumbnail {
+            display: none;
+        }
+        
+        .video-loaded .youtube-iframe {
+            display: block;
+        }
+
+        /* PDF-specific styles */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+                padding: 0;
+                margin: 0;
+            }
+            .content-section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 20px 0;
+                padding: 15px;
+                box-shadow: none;
+                border: 1px solid #eee;
+            }
+            .chart-container {
+                height: 300px;
+                margin: 20px auto;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            #main-header {
+                color: black;
+                background-color: white;
+                border: 2px solid var(--primary-color);
+            }
+            h1 {
+                color: var(--primary-color);
+            }
+            .button-container, .custom-image-widget, .floating-gif {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
-
-
-
-        
-         <div class="custom-image-widget" style="position: relative; display: inline-block;"> <!-- ADD THESE STYLES -->
-    <a href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/en-v02">
-        <img class="custom-image" 
-             src="https://bucket.mlcdn.com/a/3336/3336910/images/81299ab4b3def01be268d66464324457d20931ac.gif" 
-             alt="English Translation"
-             style="display: block;"> <!-- Ensure image is block-level -->
-    </a>
-
-</div>
-
-
-
-
-    
+    <div class="custom-image-widget">
+        <a href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/en-v02">
+            <img class="custom-image" 
+                 src="https://bucket.mlcdn.com/a/3336/3336910/images/81299ab4b3def01be268d66464324457d20931ac.gif" 
+                 alt="English Translation">
+        </a>
+    </div>
 
     <div id="page-container">
         <header id="main-header">
-
-            
-              <!-- Add this div for the floating GIF -->
-    <div class="floating-gif">
-        <img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/Badge_Acceso_Premium.gif?v=1755306928" alt="Floating animation">
-    </div>
+            <div class="floating-gif">
+                <img src="https://cdn.shopify.com/s/files/1/0242/0175/6777/files/Badge_Acceso_Premium.gif?v=1755306928" alt="Floating animation">
+            </div>
             <h1>Tendencias de Consumo en 2025</h1>
             <p style="color: white;">Un análisis detallado para marcas, freelancers y profesionales del marketing</p>
         </header>
 
-
-
-
-
-        
-     <!-- Your hero section -->
-<section id="hero-card">
-  <div id="hero-content">
-    <h2 class="hero-title">Informe Exclusivo 2025</h2>
-    <h3 class="hero-subtitle">Datos clave sobre el comportamiento del consumidor</h3>
-    <p class="hero-text">Descubre las tendencias que están transformando el panorama del marketing digital y el comercio electrónico en este año clave. Nuestro informe detallado te proporcionará insights accionables para tu estrategia.</p>
-    <button id="downloadPdfBtn" class="cta-button">
-      <i data-lucide="download"></i>
-      <span>Descargar Informe</span>
-    </button>
-  </div>
-  <div id="hero-image">
-    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/17b6b181b32210b008ee8125137a2641847c3491.png" alt="Tendencias de consumo 2025">
-  </div>
-</section>
-        
-
-
-
-
-
-<section id="introduction-section" class="content-section">
-    <h2>Introducción</h2>
-    <p>En la primera mitad de 2025, el comportamiento de compra de los consumidores ha experimentado cambios significativos. A pesar de un aumento en la actividad de compra, el gasto total ha mostrado un crecimiento mínimo. Este informe analiza estos cambios y ofrece estrategias para que marcas, freelancers y profesionales se adapten a esta nueva realidad.</p>
-    
-    <!-- YouTube Video with GIF Thumbnail -->
-    <div class="video-container">
-        <!-- Thumbnail wrapper that shows before click -->
-        <div class="video-thumbnail" onclick="loadVideo(this)">
-            <img src="https://example.com/your-thumbnail.gif" alt="Video thumbnail" class="thumbnail-gif">
-            <div class="play-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="#DF1783">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                </svg>
+        <section id="hero-card">
+            <div id="hero-content">
+                <h2 class="hero-title">Informe Exclusivo 2025</h2>
+                <h3 class="hero-subtitle">Datos clave sobre el comportamiento del consumidor</h3>
+                <p class="hero-text">Descubre las tendencias que están transformando el panorama del marketing digital y el comercio electrónico en este año clave. Nuestro informe detallado te proporcionará insights accionables para tu estrategia.</p>
+                <button id="downloadPdfBtn" class="cta-button">
+                    <i data-lucide="download"></i>
+                    <span>Descargar Informe</span>
+                </button>
             </div>
-        </div>
-        
-        <!-- Actual iframe (hidden initially) -->
-        <iframe width="560" height="315" src="about:blank" 
-                data-src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen class="youtube-iframe"></iframe>
-    </div>
-</section>
+            <div id="hero-image">
+                <img src="https://bucket.mlcdn.com/a/3336/3336910/images/17b6b181b32210b008ee8125137a2641847c3491.png" alt="Tendencias de consumo 2025">
+            </div>
+        </section>
 
-
-
-        
+        <section id="introduction-section" class="content-section">
+            <h2>Introducción</h2>
+            <p>En la primera mitad de 2025, el comportamiento de compra de los consumidores ha experimentado cambios significativos. A pesar de un aumento en la actividad de compra, el gasto total ha mostrado un crecimiento mínimo. Este informe analiza estos cambios y ofrece estrategias para que marcas, freelancers y profesionales se adapten a esta nueva realidad.</p>
+            
+            <div class="video-container">
+                <div class="video-thumbnail" onclick="loadVideo(this)">
+                    <img src="https://bucket.mlcdn.com/a/3336/3336910/images/17b6b181b32210b008ee8125137a2641847c3491.png" alt="Video thumbnail" class="thumbnail-gif">
+                    <div class="play-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="#DF1783">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                    </div>
+                </div>
+                <iframe width="560" height="315" src="about:blank" 
+                        data-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen class="youtube-iframe"></iframe>
+            </div>
+        </section>
 
         <section id="research-section" class="content-section">
             <h2>1. Mayor Investigación, Menor Gasto</h2>
@@ -655,98 +645,72 @@
 
         <section id="glossary-section" class="content-section">
             <h2>Glosario</h2>
-          <dl>
-    <dt>📌 AOV (Average Order Value):</dt>
-    <dd>Valor promedio de cada pedido realizado por los clientes.</dd>
-    
-    <dt>📌 Conversión:</dt>
-    <dd>Proceso en el que un visitante realiza una acción deseada, como una compra.</dd>
-    
-    <dt>📌 Marketing de Afiliados:</dt>
-    <dd>Estrategia en la que una marca recompensa a socios por generar tráfico o ventas a través de sus esfuerzos de marketing.</dd>
-    
-    <dt>📌 Influencer Marketing:</dt>
-    <dd>Colaboración con personas influyentes para promocionar productos o servicios.</dd>
-    
-    <dt>📌 Atribución Multicanal:</dt>
-    <dd>Método para rastrear y analizar el recorrido del cliente a través de múltiples puntos de contacto antes de la conversión.</dd>
-</dl>
+            <dl>
+                <dt>AOV (Average Order Value):</dt>
+                <dd>Valor promedio de cada pedido realizado por los clientes.</dd>
+                <dt>Conversión:</dt>
+                <dd>Proceso en el que un visitante realiza una acción deseada, como una compra.</dd>
+                <dt>Marketing de Afiliados:</dt>
+                <dd>Estrategia en la que una marca recompensa a socios por generar tráfico o ventas a través de sus esfuerzos de marketing.</dd>
+                <dt>Influencer Marketing:</dt>
+                <dd>Colaboración con personas influyentes para promocionar productos o servicios.</dd>
+                <dt>Atribución Multicanal:</dt>
+                <dd>Método para rastrear y analizar el recorrido del cliente a través de múltiples puntos de contacto antes de la conversión.</dd>
+            </dl>
         </section>
 
-
-
-   <section id="download-section" class="content-section">
+        <section id="download-section" class="content-section">
             <h2>Descarga el Informe Completo</h2>
             <p>Para obtener el informe completo en formato PDF, incluyendo gráficos interactivos y ejemplos detallados.</p>
+            
             <div class="button-container">
-                <button id="downloadPdfBtn" class="cta-button">
-                    <i data-lucide="download"></i>
-                    <span>Descargar Reporte</span>
-                </button>
-                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">
-                    <i data-lucide="external-link"></i>
-                    <span>Explorar Fuente</span>
-                </a>
+                <button id="downloadPdfBtn2" class="cta-button">Descargar Reporte</button>
+                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">Explorar Fuente</a>
             </div>
         </section>
-        
 
+        <section id="comments-section" class="content-section">
+            <h2>Comentarios</h2>
+            <p>Déjanos tu opinión sobre estas tendencias de consumo</p>
+            
+            <div id="fb-root"></div>
+            <div class="fb-comments" 
+                 data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" 
+                 data-width="100%" 
+                 data-numposts="10"
+                 data-order-by="reverse_time"></div>
+        </section>
 
-  <!-- Facebook Comments Section -->
-    <section id="comments-section" class="content-section">
-        <h2>Comentarios</h2>
-        <p>Déjanos tu opinión sobre estas tendencias de consumo</p>
-        
-        <!-- Official Facebook Comments Widget -->
-        <div id="fb-root"></div>
-        <div class="fb-comments" 
-             data-href="https://bebell-digital-solutions.github.io/Informe-benchmark-retail-2025/es-v02" 
-             data-width="100%" 
-             data-numposts="10"
-             data-order-by="reverse_time"></div>
-    </section>
+        <footer class="mt-8 sm:mt-12 pt-6 sm:pt-8 pb-6 sm:pb-8 border-t border-gray-200 dark:border-slate-700 text-center text-xs sm:text-sm text-gray-500 dark:text-slate-400 px-4">
+            <div class="social-links">
+                <a href="https://bebell-digital-solutions.github.io/checklist-creator/" class="social-link" rel="noopener">
+                    <span>☑️</span> Checklist Creator
+                </a>
+                <a href="https://bebell-digital-solutions.github.io/tasks-manager/en-v03" class="social-link" rel="noopener">
+                    <span>🎯</span> Tasks Manager
+                </a>
+                <a href="https://bebell-digital-solutions.github.io/bookmark-page/en-v03" class="social-link" rel="noopener">
+                    <span>🔗</span> Links Manager
+                </a>
+                <a href="https://bebell-digital-solutions.github.io/magic-toolbox-database/en-v03" class="social-link" rel="noopener">
+                    <span>🧰</span> Magic Toolbox
+                </a>
+                <a href="mailto:soporte@bebelldigitalsolutions.com" class="social-link"  rel="noopener">
+                    <span>📨</span> Tech Support
+                </a>
+            </div>
 
+            <div class="bebell-footer">
+                <p><a id="copyrightYear"> © 2024 • All rights reserved.</a>
+                <br>Powered with 💖 by  
+                <a href="https://bebelldigitalsolutions.com" class="bebell-link">
+                    Bebell Digital Solutions.
+                </a></p>
+            </div>
+        </footer>
+    </div>
 
-
-
-            <footer class="mt-8 sm:mt-12 pt-6 sm:pt-8 pb-6 sm:pb-8 border-t border-gray-200 dark:border-slate-700 text-center text-xs sm:text-sm text-gray-500 dark:text-slate-400 px-4">
-     
- 
-                    
-                       <div class="social-links">
-            <a href="https://bebell-digital-solutions.github.io/checklist-creator/" class="social-link" rel="noopener">
-                <span>☑️</span> Checklist Creator
-            </a>
-            <a href="https://bebell-digital-solutions.github.io/tasks-manager/en-v03" class="social-link" rel="noopener">
-                <span>🎯</span> Tasks Manager
-            </a>
-            <a href="https://bebell-digital-solutions.github.io/bookmark-page/en-v03" class="social-link" rel="noopener">
-                <span>🔗</span> Links Manager
-            </a>
-            <a href="https://bebell-digital-solutions.github.io/magic-toolbox-database/en-v03" class="social-link" rel="noopener">
-                <span>🧰</span> Magic Toolbox
-            </a>
-            <a href="mailto:soporte@bebelldigitalsolutions.com" class="social-link"  rel="noopener">
-                <span>📨</span> Tech Support
-            </a>
-        </div>
-
-    
-
-
-<div class="bebell-footer">
-                 <p><a id="copyrightYear"> © 2024 • All rights reserved.</a>
-            <br>Powered with 💖 by  
-            <a href="https://bebelldigitalsolutions.com" class="bebell-link">
-                Bebell Digital Solutions.
-            </a></p>
-              
-</div>
-
-                </footer>
-
-<!-- BACK TO TOP ICON-->
-    <!-- Back to Top Button Script -->
+    <!-- BACK TO TOP ICON-->
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         const backToTop = document.createElement("div");
@@ -757,16 +721,13 @@
         backToTop.style.display = "none";
         backToTop.style.cursor = "pointer";
         backToTop.style.zIndex = "9999";
-        
         const backToTopImg = document.createElement("img");
         backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/29840e122b950f88fdca23072015101b427a9112.png";
         backToTopImg.alt = "Volver arriba";
         backToTopImg.style.width = "40px";
         backToTopImg.style.height = "40px";
-        
         backToTop.appendChild(backToTopImg);
         document.body.appendChild(backToTop);
-        
         window.addEventListener("scroll", function () {
             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                 backToTop.style.display = "block";
@@ -774,7 +735,6 @@
                 backToTop.style.display = "none";
             }
         });
-        
         backToTop.addEventListener("click", function () {
             window.scrollTo({
                 top: 0,
@@ -783,320 +743,295 @@
         });
     });
     </script>
-<!-- END BACK TO TOP ICON-->
 
-
-
-
-    <!-- Video Loader Script -->
     <script>
-    function loadVideo(thumbnail) {
-        const container = thumbnail.parentElement;
-        const iframe = container.querySelector('.youtube-iframe');
-        iframe.src = iframe.dataset.src;
-        container.classList.add('video-loaded');
-        console.log('Video playback started');
-    }
+        function loadVideo(thumbnail) {
+            const container = thumbnail.parentElement;
+            const iframe = container.querySelector('.youtube-iframe');
+            
+            // Load the video
+            iframe.src = iframe.dataset.src;
+            
+            // Switch classes to show video
+            container.classList.add('video-loaded');
+            
+            // Track the play event if needed
+            console.log('Video playback started');
+        }
     </script>
 
-    <!-- Facebook SDK -->
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>    
-<script>
-
-
-   <!-- MAIN SCRIPT WITH FIXED PDF GENERATION -->
+    <!-- Official Facebook SDK -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
+    
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        initCharts();
-        setupPDFDownload();
-        lucide.createIcons();
-        document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
-    });
-
-
-  // 1. CHART INITIALIZATION
-  function initCharts() {
-    // Initialize all charts
-    new Chart(document.getElementById('researchChart').getContext('2d'), getResearchChartConfig());
-    new Chart(document.getElementById('aovChart').getContext('2d'), getAOVChartConfig());
-    new Chart(document.getElementById('marketingChart').getContext('2d'), getMarketingChartConfig());
-    new Chart(document.getElementById('categoriesChart').getContext('2d'), getCategoriesChartConfig());
-    new Chart(document.getElementById('projectionsChart').getContext('2d'), getProjectionsChartConfig());
-  }
-
-  // Chart Configurations
-  function getResearchChartConfig() {
-    return {
-      type: 'bar',
-      data: {
-        labels: ['Clics', 'Pedidos', 'Gasto Total'],
-        datasets: [{
-          label: 'Cambio porcentual 2024-2025',
-          data: [18, 12, 0.4],
-          backgroundColor: [
-            'rgba(223, 23, 131, 0.7)',
-            'rgba(223, 23, 131, 0.5)',
-            'rgba(223, 23, 131, 0.3)'
-          ],
-          borderColor: [
-            'rgba(223, 23, 131, 1)',
-            'rgba(223, 23, 131, 1)',
-            'rgba(223, 23, 131, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: getCommonChartOptions({
-        yTitle: 'Cambio porcentual (%)',
-        title: 'Aumento en actividad vs crecimiento del gasto'
-      })
-    };
-  }
-
-  function getAOVChartConfig() {
-    return {
-      type: 'line',
-      data: {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-        datasets: [{
-          label: 'Valor promedio por pedido (AOV)',
-          data: [120, 115, 110, 108, 107, 105],
-          fill: false,
-          backgroundColor: 'rgba(223, 23, 131, 0.7)',
-          borderColor: 'rgba(223, 23, 131, 1)',
-          tension: 0.1
-        }]
-      },
-      options: getCommonChartOptions({
-        yTitle: 'Valor promedio ($)',
-        xTitle: 'Mes del año 2025',
-        title: 'Disminución del valor promedio por pedido',
-        beginAtZero: false
-      })
-    };
-  }
-
-  function getMarketingChartConfig() {
-    return {
-      type: 'doughnut',
-      data: {
-        labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
-        datasets: [{
-          data: [15, 30, 40, 15],
-          backgroundColor: [
-            'rgba(223, 23, 131, 0.7)',
-            'rgba(51, 51, 51, 0.7)',
-            'rgba(223, 23, 131, 0.5)',
-            'rgba(51, 51, 51, 0.5)'
-          ],
-          borderColor: [
-            'rgba(223, 23, 131, 1)',
-            'rgba(51, 51, 51, 1)',
-            'rgba(223, 23, 131, 1)',
-            'rgba(51, 51, 51, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: 'Participación en pedidos por tipo de asociación'
-          },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }
-    };
-  }
-
-  function getCategoriesChartConfig() {
-    return {
-      type: 'radar',
-      data: {
-        labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
-        datasets: [{
-          label: 'Cambio en AOV (%)',
-          data: [12, 8, 15, 5, -10, -2],
-          backgroundColor: 'rgba(223, 23, 131, 0.2)',
-          borderColor: 'rgba(223, 23, 131, 1)',
-          pointBackgroundColor: 'rgba(223, 23, 131, 1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          r: {
-            angleLines: {
-              display: true
-            },
-            suggestedMin: -15,
-            suggestedMax: 20
-          }
-        },
-        plugins: {
-          title: {
-            display: true,
-            text: 'Rendimiento por categoría de producto'
-          }
-        }
-      }
-    };
-  }
-
-  function getProjectionsChartConfig() {
-    return {
-      type: 'bar',
-      data: {
-        labels: ['2025', '2026', '2030', '2035'],
-        datasets: [
-          {
-            label: 'Investigación prolongada',
-            data: [85, 90, 75, 60],
-            backgroundColor: 'rgba(223, 23, 131, 0.7)'
-          },
-          {
-            label: 'Marketing de influencia',
-            data: [40, 45, 80, 65],
-            backgroundColor: 'rgba(51, 51, 51, 0.7)'
-          },
-          {
-            label: 'Realidad aumentada',
-            data: [10, 15, 35, 75],
-            backgroundColor: 'rgba(223, 23, 131, 0.5)'
-          }
-        ]
-      },
-      options: getCommonChartOptions({
-        yTitle: 'Adopción estimada (%)',
-        title: 'Proyección de tendencias de consumo'
-      })
-    };
-  }
-
-  function getCommonChartOptions({ yTitle, xTitle, title, beginAtZero = true }) {
-    return {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: beginAtZero,
-          title: { display: true, text: yTitle }
-        },
-        ...(xTitle && {
-          x: { title: { display: true, text: xTitle } }
-        })
-      },
-      plugins: {
-        title: {
-          display: true,
-          text: title
-        }
-      }
-    };
-  }
-
-  // 2. PDF DOWNLOAD FUNCTIONALITY - UPDATED VERSION
-   function setupPDFDownload() {
-        const downloadBtn = document.getElementById('downloadPdfBtn');
-        if (downloadBtn) {
-            downloadBtn.addEventListener('click', generatePDF);
-        }
-    }
-
-    async function generatePDF() {
-        const downloadBtn = document.getElementById('downloadPdfBtn');
-        if (!downloadBtn) return;
-
-        try {
-            // Show loading state
-            const originalText = downloadBtn.innerHTML;
-            downloadBtn.innerHTML = '<i data-lucide="loader-circle" class="animate-spin"></i> <span>Generando PDF...</span>';
+        document.addEventListener('DOMContentLoaded', function() {
+            initCharts();
+            setupPDFDownload();
             lucide.createIcons();
+            updateCopyrightYear();
+        });
 
-            // Verify libraries are loaded
-            if (typeof jsPDF === 'undefined' || typeof html2canvas === 'undefined') {
-                throw new Error('Librerías no cargadas correctamente');
-            }
+        function updateCopyrightYear() {
+            document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
+        }
 
+        // 1. CHART INITIALIZATION
+        function initCharts() {
+            // Initialize all charts
+            new Chart(document.getElementById('researchChart').getContext('2d'), getResearchChartConfig());
+            new Chart(document.getElementById('aovChart').getContext('2d'), getAOVChartConfig());
+            new Chart(document.getElementById('marketingChart').getContext('2d'), getMarketingChartConfig());
+            new Chart(document.getElementById('categoriesChart').getContext('2d'), getCategoriesChartConfig());
+            new Chart(document.getElementById('projectionsChart').getContext('2d'), getProjectionsChartConfig());
+        }
+
+        // Chart Configurations
+        function getResearchChartConfig() {
+            return {
+                type: 'bar',
+                data: {
+                    labels: ['Clics', 'Pedidos', 'Gasto Total'],
+                    datasets: [{
+                        label: 'Cambio porcentual 2024-2025',
+                        data: [18, 12, 0.4],
+                        backgroundColor: [
+                            'rgba(223, 23, 131, 0.7)',
+                            'rgba(223, 23, 131, 0.5)',
+                            'rgba(223, 23, 131, 0.3)'
+                        ],
+                        borderColor: [
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(223, 23, 131, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: getCommonChartOptions({
+                    yTitle: 'Cambio porcentual (%)',
+                    title: 'Aumento en actividad vs crecimiento del gasto'
+                })
+            };
+        }
+
+        function getAOVChartConfig() {
+            return {
+                type: 'line',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Valor promedio por pedido (AOV)',
+                        data: [120, 115, 110, 108, 107, 105],
+                        fill: false,
+                        backgroundColor: 'rgba(223, 23, 131, 0.7)',
+                        borderColor: 'rgba(223, 23, 131, 1)',
+                        tension: 0.1
+                    }]
+                },
+                options: getCommonChartOptions({
+                    yTitle: 'Valor promedio ($)',
+                    xTitle: 'Mes del año 2025',
+                    title: 'Disminución del valor promedio por pedido',
+                    beginAtZero: false
+                })
+            };
+        }
+
+        function getMarketingChartConfig() {
+            return {
+                type: 'doughnut',
+                data: {
+                    labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
+                    datasets: [{
+                        data: [15, 30, 40, 15],
+                        backgroundColor: [
+                            'rgba(223, 23, 131, 0.7)',
+                            'rgba(51, 51, 51, 0.7)',
+                            'rgba(223, 23, 131, 0.5)',
+                            'rgba(51, 51, 51, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(51, 51, 51, 1)',
+                            'rgba(223, 23, 131, 1)',
+                            'rgba(51, 51, 51, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Participación en pedidos por tipo de asociación'
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            };
+        }
+
+        function getCategoriesChartConfig() {
+            return {
+                type: 'radar',
+                data: {
+                    labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
+                    datasets: [{
+                        label: 'Cambio en AOV (%)',
+                        data: [12, 8, 15, 5, -10, -2],
+                        backgroundColor: 'rgba(223, 23, 131, 0.2)',
+                        borderColor: 'rgba(223, 23, 131, 1)',
+                        pointBackgroundColor: 'rgba(223, 23, 131, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: -15,
+                            suggestedMax: 20
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Rendimiento por categoría de producto'
+                        }
+                    }
+                }
+            };
+        }
+
+        function getProjectionsChartConfig() {
+            return {
+                type: 'bar',
+                data: {
+                    labels: ['2025', '2026', '2030', '2035'],
+                    datasets: [
+                        {
+                            label: 'Investigación prolongada',
+                            data: [85, 90, 75, 60],
+                            backgroundColor: 'rgba(223, 23, 131, 0.7)'
+                        },
+                        {
+                            label: 'Marketing de influencia',
+                            data: [40, 45, 80, 65],
+                            backgroundColor: 'rgba(51, 51, 51, 0.7)'
+                        },
+                        {
+                            label: 'Realidad aumentada',
+                            data: [10, 15, 35, 75],
+                            backgroundColor: 'rgba(223, 23, 131, 0.5)'
+                        }
+                    ]
+                },
+                options: getCommonChartOptions({
+                    yTitle: 'Adopción estimada (%)',
+                    title: 'Proyección de tendencias de consumo'
+                })
+            };
+        }
+
+        function getCommonChartOptions({ yTitle, xTitle, title, beginAtZero = true }) {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: beginAtZero,
+                        title: { display: true, text: yTitle }
+                    },
+                    ...(xTitle && {
+                        x: { title: { display: true, text: xTitle } }
+                    })
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: title
+                    }
+                }
+            };
+        }
+
+        // 2. PDF DOWNLOAD FUNCTIONALITY
+        function setupPDFDownload() {
+            document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
+            document.getElementById('downloadPdfBtn2').addEventListener('click', generatePDF);
+        }
+
+        async function generatePDF() {
             const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const margin = 15;
+            const pageWidth = pdf.internal.pageSize.getWidth() - (margin * 2);
+            
+            // Create a clone of the content to modify for PDF
             const element = document.getElementById('page-container');
-            
-            // Create clone for PDF generation
             const clone = element.cloneNode(true);
-            clone.style.width = '980px';
-            clone.style.margin = '0 auto';
-            clone.style.padding = '0';
-            clone.style.visibility = 'hidden';
-            document.body.appendChild(clone);
-
-            // Remove unwanted elements
-            const elementsToRemove = [
-                '.video-container',
-                '.fb-comments-container',
-                '.custom-image-widget',
-                '.floating-gif',
-                '#comments-section',
-                '.footer',
-                '#main-footer',
-                '#back-to-top'
-            ];
             
-            elementsToRemove.forEach(selector => {
-                clone.querySelectorAll(selector).forEach(el => el.remove());
-            });
-
+            // Prepare the clone for PDF
+            clone.style.width = pageWidth + 'mm';
+            clone.style.padding = '0';
+            clone.style.margin = '0';
+            
+            // Remove elements we don't want in PDF
+            clone.querySelectorAll('.video-container, .fb-comments-container, .custom-image-widget, .floating-gif, .button-container a').forEach(el => el.remove());
+            
             // Add PDF-specific styles
             const style = document.createElement('style');
             style.innerHTML = `
-                body { font-family: Arial; line-height: 1.5; }
-                .content-section, .chart-container { page-break-inside: avoid; }
-                img { max-width: 100%; height: auto; }
-                a { color: #DF1783; text-decoration: underline; }
-                #hero-card { margin-bottom: 20px; }
+                body { font-family: Arial; line-height: 1.5; font-size: 12pt; }
+                .content-section { margin-bottom: 15px; padding: 15px; border: 1px solid #eee; page-break-inside: avoid; }
+                .chart-container { height: 250px; margin: 15px 0; page-break-inside: avoid; }
+                h1, h2, h3 { color: #DF1783; }
+                #main-header { background-color: white; color: black; border: 2px solid #DF1783; }
+                .cta-button { display: none !important; }
             `;
             clone.prepend(style);
-
-            // Generate PDF
-            const pdf = new jsPDF('p', 'pt', 'a4');
-            const options = {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                scrollY: 0,
-                logging: true
-            };
-
-            const canvas = await html2canvas(clone, options);
-            const imgData = canvas.toDataURL('image/png');
-            const pdfWidth = pdf.internal.pageSize.getWidth() - 40;
-            const imgWidth = pdfWidth;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-            // Add first page
-            pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
             
-            // Add additional pages if content is long
+            // Add the clone to the body temporarily
+            document.body.appendChild(clone);
+            
+            // Generate the PDF
+            const canvas = await html2canvas(clone, {
+                scale: 2,
+                logging: false,
+                useCORS: true,
+                allowTaint: true
+            });
+            
+            const imgWidth = pageWidth;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            // Add pages to PDF
+            const pageHeight = pdf.internal.pageSize.getHeight() - (margin * 2);
             let heightLeft = imgHeight;
-            let position = 0;
+            let position = margin;
             let pageCount = 1;
             
+            pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            
             while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
                 pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 20, position, imgWidth, imgHeight);
-                heightLeft -= pdf.internal.pageSize.getHeight();
+                position = heightLeft - imgHeight + margin;
+                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
                 pageCount++;
             }
-
+            
             // Add page numbers
             for (let i = 1; i <= pageCount; i++) {
                 pdf.setPage(i);
@@ -1104,28 +1039,23 @@
                 pdf.setTextColor(150);
                 pdf.text(
                     `Página ${i} de ${pageCount}`,
-                    pdf.internal.pageSize.getWidth() - 40,
-                    pdf.internal.pageSize.getHeight() - 20,
+                    pdf.internal.pageSize.getWidth() - margin,
+                    pdf.internal.pageSize.getHeight() - 10,
                     { align: 'right' }
                 );
             }
-
-            // Save and clean up
-            pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
-            clone.remove();
             
-        } catch (error) {
-            console.error('PDF Generation Error:', error);
-            alert('Error al generar el PDF: ' + error.message);
-        } finally {
-            if (downloadBtn) {
-                downloadBtn.innerHTML = originalText;
-                lucide.createIcons();
-            }
+            // Remove the clone
+            document.body.removeChild(clone);
+            
+            // Save the PDF
+            pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
         }
-    }
     </script>
 
-
+    <!-- Lucide Icons Initialization -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
