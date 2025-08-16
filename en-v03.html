@@ -1188,7 +1188,7 @@
 
 
     async function generatePDF() {
-        showNotification('⏱️ Generating the PDF file...', 'info');
+        showNotification('⏱️ Generating the PDF file... Please wait.', 'success');
         try {
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF('p', 'mm', 'a4');
