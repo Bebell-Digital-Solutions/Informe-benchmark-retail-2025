@@ -1132,179 +1132,71 @@
             };
         }
 
-        // 2. PDF DOWNLOAD FUNCTIONALITY
-        function setupPDFDownload() {
-            document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
-            document.getElementById('downloadPdfBtn2').addEventListener('click', generatePDF);
-        }
+     // 2. PDF DOWNLOAD FUNCTIONALITY
+        function setupPDFDownload() {
+            document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
+            document.getElementById('downloadPdfBtn2').addEventListener('click', generatePDF);
+        }
 
-         async function generatePDF() {
-        try {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const margin = 15; // mm
-            const pageWidth = pdf.internal.pageSize.getWidth() - (margin * 2);
-            
-            // Create a clone of the content to modify for PDF
-            const element = document.getElementById('page-container');
-            const clone = element.cloneNode(true);
-            
-            // Prepare the clone for PDF
-            clone.style.width = pageWidth + 'mm';
-            clone.style.padding = '0';
-            clone.style.margin = '0';
-            
-            // Add PDF-specific styles
-            const style = document.createElement('style');
-            style.innerHTML = `
-                body { 
-                    font-family: Arial, sans-serif; 
-                    line-height: 1.5; 
-                    font-size: 12pt; 
-                    background-color: white !important;
-                    color: black !important;
-                    width: 100% !important;
-                }
-                .content-section { 
-                    page-break-after: always !important;
-                    page-break-inside: avoid !important;
-                    break-inside: avoid !important;
-                    margin: 0 0 10mm 0 !important;
-                    padding: 15mm !important;
-                    box-shadow: none !important;
-                    border: 1px solid #eee !important;
-                    min-height: 250mm;
-                    position: relative;
-                }
-                .chart-container { 
-                    height: 120mm !important;
-                    width: 100% !important;
-                    margin: 5mm 0 !important;
-                }
-                h1, h2, h3 { color: #DF1783 !important; }
-                #main-header { 
-                    background-color: white !important; 
-                    color: black !important; 
-                    border: 2px solid #DF1783 !important;
-                    page-break-after: always !important;
-                }
-                .button-container {
-                    position: absolute;
-                    bottom: 10mm;
-                    left: 0;
-                    right: 0;
-                    padding: 0 15mm;
-                    text-align: center;
-                }
-                .cta-button {
-                    background-color: #DF1783 !important;
-                    color: white !important;
-                    border: none !important;
-                    display: inline-block !important;
-                    text-decoration: none !important;
-                    padding: 10px 20px !important;
-                    margin: 5px !important;
-                    border-radius: 6px !important;
-                }
-                .cta-button i {
-                    display: inline-block !important;
-                }
-                /* Hide elements we don't want in PDF */
-                .custom-image-widget,
-                .floating-gif,
-                .fb-comments-container,
-                .video-thumbnail,
-                .social-links,
-                .video-container,
-                .fb-comments {
-                    display: none !important;
-                }
-            `;
-            clone.prepend(style);
-            
-            // Process buttons to make them PDF-friendly
-            clone.querySelectorAll('.cta-button').forEach(button => {
-                // Keep button structure but make it look good in PDF
-                button.style.display = 'inline-block';
-                button.style.margin = '5mm';
-                // Ensure icons are visible
-                const icons = button.querySelectorAll('i, svg');
-                icons.forEach(icon => {
-                    icon.style.display = 'inline-block';
-                    icon.style.visibility = 'visible';
-                });
-            });
-            
-            // Add the clone to the body temporarily
-            const pdfContainer = document.createElement('div');
-            pdfContainer.style.position = 'absolute';
-            pdfContainer.style.left = '-9999px';
-            pdfContainer.style.width = pageWidth + 'mm';
-            pdfContainer.appendChild(clone);
-            document.body.appendChild(pdfContainer);
-            
-            // Generate PDF pages one by one for better quality
-            const sections = clone.querySelectorAll('.content-section, #main-header');
-            
-            for (let i = 0; i < sections.length; i++) {
-                const section = sections[i];
-                
-                // Create a container for each section
-                const sectionContainer = document.createElement('div');
-                sectionContainer.style.width = pageWidth + 'mm';
-                sectionContainer.style.padding = '0';
-                sectionContainer.style.margin = '0';
-                sectionContainer.appendChild(section.cloneNode(true));
-                
-                // Generate canvas for this section
-                const canvas = await html2canvas(sectionContainer, {
-                    scale: 2, // Balanced quality and performance
-                    logging: true,
-                    useCORS: true,
-                    allowTaint: true,
-                    backgroundColor: '#FFFFFF',
-                    scrollX: 0,
-                    scrollY: 0,
-                    windowWidth: sectionContainer.scrollWidth,
-                    windowHeight: sectionContainer.scrollHeight
-                });
-                
-                // Add to PDF
-                const imgData = canvas.toDataURL('image/png');
-                const imgWidth = pageWidth;
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                
-                if (i > 0) pdf.addPage();
-                pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight);
-            }
-            
-            // Add page numbers
-            const pageCount = pdf.internal.getNumberOfPages();
-            for (let i = 1; i <= pageCount; i++) {
-                pdf.setPage(i);
-                pdf.setFontSize(10);
-                pdf.setTextColor(150);
-                pdf.text(
-                    `Página ${i} de ${pageCount}`,
-                    pdf.internal.pageSize.getWidth() - margin,
-                    pdf.internal.pageSize.getHeight() - 10,
-                    { align: 'right' }
-                );
-            }
-            
-            // Save the PDF
-            pdf.save('Tendencias-Consumo-2025-Bebell-Digital-Solutions.pdf');
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            alert('Error generando el PDF. Por favor, revisa la consola para más detalles.');
-        } finally {
-            // Clean up
-            const pdfContainer = document.querySelector('div[style*="-9999px"]');
-            if (pdfContainer) {
-                document.body.removeChild(pdfContainer);
-            }
-        }
-    }
+        async function generatePDF() {
+            try {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pageContainer = document.getElementById('page-container');
+                
+                // Hide elements that should not be in the PDF
+                const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
+                elementsToHide.forEach(el => el.style.display = 'none');
+                
+                // Temporarily adjust button styles for better visibility in the screenshot
+                const buttons = document.querySelectorAll('.cta-button');
+                buttons.forEach(btn => {
+                    btn.style.backgroundColor = '#DF1783';
+                    btn.style.color = '#FFFFFF';
+                });
+
+                // Use html2canvas to capture the entire page container
+                const canvas = await html2canvas(pageContainer, {
+                    scale: 2, // Improve resolution
+                    useCORS: true,
+                    allowTaint: true
+                });
+                
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                // Add the first page
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // Add remaining pages
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                pdf.save('Tendencias-Consumo-2025-Bebell-Digital-Solutions.pdf');
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generando el PDF. Por favor, revisa la consola para más detalles.');
+            } finally {
+                // Restore hidden elements and button styles
+                const elementsToHide = document.querySelectorAll('.custom-image-widget, .floating-gif, .fb-comments-container, .video-thumbnail, .social-links, .video-container, .cta-banner');
+                elementsToHide.forEach(el => el.style.display = '');
+                const buttons = document.querySelectorAll('.cta-button');
+                buttons.forEach(btn => {
+                    btn.style.backgroundColor = '';
+                    btn.style.color = '';
+                });
+            }
+        }
 </script>
 
 
