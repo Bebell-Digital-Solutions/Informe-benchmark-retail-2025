@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tendencias de Consumo 2025 - Bebell Digital Solutions</title>
+  <!-- Libraries must be loaded first -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Favicon -->
-    <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/f4ee82b1e57d46d38bc15522f71e8f31477026e8.png">  
-    
-      <!-- Add this to use Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     
   <style>
     :root {
@@ -658,32 +655,41 @@
 
         <section id="glossary-section" class="content-section">
             <h2>Glosario</h2>
-            <dl>
-                <dt>AOV (Average Order Value):</dt>
-                <dd>Valor promedio de cada pedido realizado por los clientes.</dd>
-                <dt>Conversión:</dt>
-                <dd>Proceso en el que un visitante realiza una acción deseada, como una compra.</dd>
-                <dt>Marketing de Afiliados:</dt>
-                <dd>Estrategia en la que una marca recompensa a socios por generar tráfico o ventas a través de sus esfuerzos de marketing.</dd>
-                <dt>Influencer Marketing:</dt>
-                <dd>Colaboración con personas influyentes para promocionar productos o servicios.</dd>
-                <dt>Atribución Multicanal:</dt>
-                <dd>Método para rastrear y analizar el recorrido del cliente a través de múltiples puntos de contacto antes de la conversión.</dd>
-            </dl>
+          <dl>
+    <dt>📌 AOV (Average Order Value):</dt>
+    <dd>Valor promedio de cada pedido realizado por los clientes.</dd>
+    
+    <dt>📌 Conversión:</dt>
+    <dd>Proceso en el que un visitante realiza una acción deseada, como una compra.</dd>
+    
+    <dt>📌 Marketing de Afiliados:</dt>
+    <dd>Estrategia en la que una marca recompensa a socios por generar tráfico o ventas a través de sus esfuerzos de marketing.</dd>
+    
+    <dt>📌 Influencer Marketing:</dt>
+    <dd>Colaboración con personas influyentes para promocionar productos o servicios.</dd>
+    
+    <dt>📌 Atribución Multicanal:</dt>
+    <dd>Método para rastrear y analizar el recorrido del cliente a través de múltiples puntos de contacto antes de la conversión.</dd>
+</dl>
         </section>
 
 
 
-        <section id="download-section" class="content-section">
+   <section id="download-section" class="content-section">
             <h2>Descarga el Informe Completo</h2>
             <p>Para obtener el informe completo en formato PDF, incluyendo gráficos interactivos y ejemplos detallados.</p>
-            
             <div class="button-container">
-                <button id="downloadPdfBtn" class="cta-button">Descargar Reporte</button>
-                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">Explorar Fuente</a>
+                <button id="downloadPdfBtn" class="cta-button">
+                    <i data-lucide="download"></i>
+                    <span>Descargar Reporte</span>
+                </button>
+                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">
+                    <i data-lucide="external-link"></i>
+                    <span>Explorar Fuente</span>
+                </a>
             </div>
         </section>
-
+        
 
 
   <!-- Facebook Comments Section -->
@@ -740,83 +746,73 @@
                 </footer>
 
 <!-- BACK TO TOP ICON-->
-<script>
-// Create Back-to-Top Button Dynamically
-document.addEventListener("DOMContentLoaded", function () {
-    // Create the button container
-    const backToTop = document.createElement("div");
-    backToTop.id = "back-to-top";
-    backToTop.style.position = "fixed";
-    backToTop.style.bottom = "20px";
-    backToTop.style.right = "20px";
-    backToTop.style.display = "none";
-    backToTop.style.cursor = "pointer";
-    backToTop.style.zIndex = "9999";
-    // Create the image inside the button
-    const backToTopImg = document.createElement("img");
-    backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/29840e122b950f88fdca23072015101b427a9112.png";
-    backToTopImg.alt = "Volver arriba";
-    backToTopImg.style.width = "40px";
-    backToTopImg.style.height = "40px";
-    // Append image to the button
-    backToTop.appendChild(backToTopImg);
-    // Append button to the body
-    document.body.appendChild(backToTop);
-    // Scroll Event Listener
-    window.addEventListener("scroll", function () {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backToTop.style.display = "block";
-        } else {
-            backToTop.style.display = "none";
-        }
-    });
-    // Click Event for Scrolling to Top
-    backToTop.addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+    <!-- Back to Top Button Script -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const backToTop = document.createElement("div");
+        backToTop.id = "back-to-top";
+        backToTop.style.position = "fixed";
+        backToTop.style.bottom = "20px";
+        backToTop.style.right = "20px";
+        backToTop.style.display = "none";
+        backToTop.style.cursor = "pointer";
+        backToTop.style.zIndex = "9999";
+        
+        const backToTopImg = document.createElement("img");
+        backToTopImg.src = "https://bucket.mlcdn.com/a/3336/3336910/images/29840e122b950f88fdca23072015101b427a9112.png";
+        backToTopImg.alt = "Volver arriba";
+        backToTopImg.style.width = "40px";
+        backToTopImg.style.height = "40px";
+        
+        backToTop.appendChild(backToTopImg);
+        document.body.appendChild(backToTop);
+        
+        window.addEventListener("scroll", function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        });
+        
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         });
     });
-});
-</script>
+    </script>
 <!-- END BACK TO TOP ICON-->
 
 
 
 
-
-<script>
+    <!-- Video Loader Script -->
+    <script>
     function loadVideo(thumbnail) {
         const container = thumbnail.parentElement;
         const iframe = container.querySelector('.youtube-iframe');
-        
-        // Load the video
         iframe.src = iframe.dataset.src;
-        
-        // Switch classes to show video
         container.classList.add('video-loaded');
-        
-        // Track the play event if needed
         console.log('Video playback started');
     }
-</script>
+    </script>
 
-
-
-        
-
-  <!-- Official Facebook SDK (exactly as provided by Facebook) -->
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
-    
+    <!-- Facebook SDK -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>    
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    initCharts();
-    setupPDFDownload();
-    lucide.createIcons();
-    
-    // Update copyright year
-    document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
-  });
+
+
+   <!-- MAIN SCRIPT WITH FIXED PDF GENERATION -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initCharts();
+        setupPDFDownload();
+        lucide.createIcons();
+        document.getElementById('copyrightYear').textContent = `© ${new Date().getFullYear()} • All rights reserved.`;
+    });
+
 
   // 1. CHART INITIALIZATION
   function initCharts() {
@@ -1009,104 +1005,127 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 2. PDF DOWNLOAD FUNCTIONALITY - UPDATED VERSION
-  function setupPDFDownload() {
-    const downloadBtn = document.getElementById('downloadPdfBtn');
-    if (downloadBtn) {
-      downloadBtn.addEventListener('click', generatePDF);
+   function setupPDFDownload() {
+        const downloadBtn = document.getElementById('downloadPdfBtn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', generatePDF);
+        }
     }
-  }
 
-  async function generatePDF() {
-    try {
-      // Show loading state
-      const downloadBtn = document.getElementById('downloadPdfBtn');
-      const originalText = downloadBtn.innerHTML;
-      downloadBtn.innerHTML = '<i data-lucide="loader-circle" class="animate-spin"></i> <span>Generando PDF...</span>';
-      lucide.createIcons();
-      
-      // Wait for libraries to be fully loaded
-      if (typeof jsPDF === 'undefined' || typeof html2canvas === 'undefined') {
-        throw new Error('Required libraries not loaded');
-      }
-      
-      const { jsPDF } = window.jspdf;
-      const element = document.getElementById('page-container');
-      
-      // Clone the element to avoid modifying the original
-      const clone = element.cloneNode(true);
-      clone.style.width = '980px';
-      clone.style.margin = '0 auto';
-      clone.style.padding = '0';
-      document.body.appendChild(clone);
-      
-      // Remove elements we don't want in the PDF
-      clone.querySelectorAll('.video-container, .fb-comments-container, .custom-image-widget, .floating-gif, .button-container, #comments-section, .footer, #main-footer')
-         .forEach(el => el.remove());
-      
-      // Add styles for PDF
-      const style = document.createElement('style');
-      style.innerHTML = `
-        body { font-family: Arial; line-height: 1.5; }
-        .content-section, .chart-container { page-break-inside: avoid; }
-        img { max-width: 100%; height: auto; }
-        a { color: #DF1783; text-decoration: underline; }
-        #hero-card { margin-bottom: 20px; }
-      `;
-      clone.prepend(style);
-      
-      // Generate PDF
-      const pdf = new jsPDF('p', 'pt', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      
-      // Use html2canvas to capture the content
-      const canvas = await html2canvas(clone, {
-        scale: 2,
-        logging: false,
-        useCORS: true,
-        scrollY: -window.scrollY
-      });
-      
-      // Calculate image dimensions to fit PDF page
-      const imgData = canvas.toDataURL('image/png');
-      const imgWidth = pdfWidth - 40; // margin of 20px on each side
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      
-      // Add image to PDF
-      pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
-      
-      // Add page numbers
-      const totalPages = pdf.internal.getNumberOfPages();
-      for (let i = 1; i <= totalPages; i++) {
-        pdf.setPage(i);
-        pdf.setFontSize(10);
-        pdf.setTextColor(150);
-        pdf.text(
-          `Página ${i} de ${totalPages}`,
-          pdfWidth - 40,
-          pdfHeight - 20,
-          { align: 'right' }
-        );
-      }
-      
-      // Save the PDF
-      pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
-      
-      // Clean up
-      clone.remove();
-      
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Error al generar el PDF. Por favor, inténtelo de nuevo.');
-    } finally {
-      // Restore button state
-      if (downloadBtn) {
-        downloadBtn.innerHTML = originalText;
-        lucide.createIcons();
-      }
+    async function generatePDF() {
+        const downloadBtn = document.getElementById('downloadPdfBtn');
+        if (!downloadBtn) return;
+
+        try {
+            // Show loading state
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = '<i data-lucide="loader-circle" class="animate-spin"></i> <span>Generando PDF...</span>';
+            lucide.createIcons();
+
+            // Verify libraries are loaded
+            if (typeof jsPDF === 'undefined' || typeof html2canvas === 'undefined') {
+                throw new Error('Librerías no cargadas correctamente');
+            }
+
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById('page-container');
+            
+            // Create clone for PDF generation
+            const clone = element.cloneNode(true);
+            clone.style.width = '980px';
+            clone.style.margin = '0 auto';
+            clone.style.padding = '0';
+            clone.style.visibility = 'hidden';
+            document.body.appendChild(clone);
+
+            // Remove unwanted elements
+            const elementsToRemove = [
+                '.video-container',
+                '.fb-comments-container',
+                '.custom-image-widget',
+                '.floating-gif',
+                '#comments-section',
+                '.footer',
+                '#main-footer',
+                '#back-to-top'
+            ];
+            
+            elementsToRemove.forEach(selector => {
+                clone.querySelectorAll(selector).forEach(el => el.remove());
+            });
+
+            // Add PDF-specific styles
+            const style = document.createElement('style');
+            style.innerHTML = `
+                body { font-family: Arial; line-height: 1.5; }
+                .content-section, .chart-container { page-break-inside: avoid; }
+                img { max-width: 100%; height: auto; }
+                a { color: #DF1783; text-decoration: underline; }
+                #hero-card { margin-bottom: 20px; }
+            `;
+            clone.prepend(style);
+
+            // Generate PDF
+            const pdf = new jsPDF('p', 'pt', 'a4');
+            const options = {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                scrollY: 0,
+                logging: true
+            };
+
+            const canvas = await html2canvas(clone, options);
+            const imgData = canvas.toDataURL('image/png');
+            const pdfWidth = pdf.internal.pageSize.getWidth() - 40;
+            const imgWidth = pdfWidth;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            // Add first page
+            pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+            
+            // Add additional pages if content is long
+            let heightLeft = imgHeight;
+            let position = 0;
+            let pageCount = 1;
+            
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 20, position, imgWidth, imgHeight);
+                heightLeft -= pdf.internal.pageSize.getHeight();
+                pageCount++;
+            }
+
+            // Add page numbers
+            for (let i = 1; i <= pageCount; i++) {
+                pdf.setPage(i);
+                pdf.setFontSize(10);
+                pdf.setTextColor(150);
+                pdf.text(
+                    `Página ${i} de ${pageCount}`,
+                    pdf.internal.pageSize.getWidth() - 40,
+                    pdf.internal.pageSize.getHeight() - 20,
+                    { align: 'right' }
+                );
+            }
+
+            // Save and clean up
+            pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
+            clone.remove();
+            
+        } catch (error) {
+            console.error('PDF Generation Error:', error);
+            alert('Error al generar el PDF: ' + error.message);
+        } finally {
+            if (downloadBtn) {
+                downloadBtn.innerHTML = originalText;
+                lucide.createIcons();
+            }
+        }
     }
-  }
-</script>
+    </script>
+
 
 </body>
 </html>
