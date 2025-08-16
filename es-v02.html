@@ -670,289 +670,292 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v23.0"></script>
     
 <script>
-
-  // PDF Download functionality
-  document.getElementById('downloadPdfBtn').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;
-    
-    html2canvas(document.getElementById('page-container')).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgWidth = 210;
-      const pageHeight = 295;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      let heightLeft = imgHeight;
-      let position = 0;
-      
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-      
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-      
-      pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    initCharts();
+    setupPDFDownload();
+    lucide.createIcons();
   });
 
+  // 1. CHART INITIALIZATION
+  function initCharts() {
+    // Initialize all charts
+    new Chart(document.getElementById('researchChart').getContext('2d'), getResearchChartConfig());
+    new Chart(document.getElementById('aovChart').getContext('2d'), getAOVChartConfig());
+    new Chart(document.getElementById('marketingChart').getContext('2d'), getMarketingChartConfig());
+    new Chart(document.getElementById('categoriesChart').getContext('2d'), getCategoriesChartConfig());
+    new Chart(document.getElementById('projectionsChart').getContext('2d'), getProjectionsChartConfig());
+  }
 
-        
-        // Initialize charts when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Chart 1: Research vs Spending
-            const researchCtx = document.getElementById('researchChart').getContext('2d');
-            new Chart(researchCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Clics', 'Pedidos', 'Gasto Total'],
-                    datasets: [{
-                        label: 'Cambio porcentual 2024-2025',
-                        data: [18, 12, 0.4],
-                        backgroundColor: [
-                            'rgba(223, 23, 131, 0.7)',
-                            'rgba(223, 23, 131, 0.5)',
-                            'rgba(223, 23, 131, 0.3)'
-                        ],
-                        borderColor: [
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(223, 23, 131, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Cambio porcentual (%)'
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Aumento en actividad vs crecimiento del gasto'
-                        }
-                    }
-                }
-            });
+  // Chart Configurations
+  function getResearchChartConfig() {
+    return {
+      type: 'bar',
+      data: {
+        labels: ['Clics', 'Pedidos', 'Gasto Total'],
+        datasets: [{
+          label: 'Cambio porcentual 2024-2025',
+          data: [18, 12, 0.4],
+          backgroundColor: [
+            'rgba(223, 23, 131, 0.7)',
+            'rgba(223, 23, 131, 0.5)',
+            'rgba(223, 23, 131, 0.3)'
+          ],
+          borderColor: [
+            'rgba(223, 23, 131, 1)',
+            'rgba(223, 23, 131, 1)',
+            'rgba(223, 23, 131, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: getCommonChartOptions({
+        yTitle: 'Cambio porcentual (%)',
+        title: 'Aumento en actividad vs crecimiento del gasto'
+      })
+    };
+  }
 
-            // Chart 2: AOV Change
-            const aovCtx = document.getElementById('aovChart').getContext('2d');
-            new Chart(aovCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Valor promedio por pedido (AOV)',
-                        data: [120, 115, 110, 108, 107, 105],
-                        fill: false,
-                        backgroundColor: 'rgba(223, 23, 131, 0.7)',
-                        borderColor: 'rgba(223, 23, 131, 1)',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            title: {
-                                display: true,
-                                text: 'Valor promedio ($)'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Mes del año 2025'
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Disminución del valor promedio por pedido'
-                        }
-                    }
-                }
-            });
+  function getAOVChartConfig() {
+    return {
+      type: 'line',
+      data: {
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Valor promedio por pedido (AOV)',
+          data: [120, 115, 110, 108, 107, 105],
+          fill: false,
+          backgroundColor: 'rgba(223, 23, 131, 0.7)',
+          borderColor: 'rgba(223, 23, 131, 1)',
+          tension: 0.1
+        }]
+      },
+      options: getCommonChartOptions({
+        yTitle: 'Valor promedio ($)',
+        xTitle: 'Mes del año 2025',
+        title: 'Disminución del valor promedio por pedido',
+        beginAtZero: false
+      })
+    };
+  }
 
-            // Chart 3: Marketing Partnerships
-            const marketingCtx = document.getElementById('marketingChart').getContext('2d');
-            new Chart(marketingCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
-                    datasets: [{
-                        data: [15, 30, 40, 15],
-                        backgroundColor: [
-                            'rgba(223, 23, 131, 0.7)',
-                            'rgba(51, 51, 51, 0.7)',
-                            'rgba(223, 23, 131, 0.5)',
-                            'rgba(51, 51, 51, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(51, 51, 51, 1)',
-                            'rgba(223, 23, 131, 1)',
-                            'rgba(51, 51, 51, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Participación en pedidos por tipo de asociación'
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
+  function getMarketingChartConfig() {
+    return {
+      type: 'doughnut',
+      data: {
+        labels: ['Programas de lealtad', 'Plataformas de cupones', 'Influencers', 'Otros'],
+        datasets: [{
+          data: [15, 30, 40, 15],
+          backgroundColor: [
+            'rgba(223, 23, 131, 0.7)',
+            'rgba(51, 51, 51, 0.7)',
+            'rgba(223, 23, 131, 0.5)',
+            'rgba(51, 51, 51, 0.5)'
+          ],
+          borderColor: [
+            'rgba(223, 23, 131, 1)',
+            'rgba(51, 51, 51, 1)',
+            'rgba(223, 23, 131, 1)',
+            'rgba(51, 51, 51, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Participación en pedidos por tipo de asociación'
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    };
+  }
 
-            // Chart 4: Categories Performance
-            const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
-            new Chart(categoriesCtx, {
-                type: 'radar',
-                data: {
-                    labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
-                    datasets: [{
-                        label: 'Cambio en AOV (%)',
-                        data: [12, 8, 15, 5, -10, -2],
-                        backgroundColor: 'rgba(223, 23, 131, 0.2)',
-                        borderColor: 'rgba(223, 23, 131, 1)',
-                        pointBackgroundColor: 'rgba(223, 23, 131, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: {
-                                display: true
-                            },
-                            suggestedMin: -15,
-                            suggestedMax: 20
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Rendimiento por categoría de producto'
-                        }
-                    }
-                }
-            });
+  function getCategoriesChartConfig() {
+    return {
+      type: 'radar',
+      data: {
+        labels: ['Salud', 'Belleza', 'Deportes', 'Hogar', 'Electrónica', 'Moda'],
+        datasets: [{
+          label: 'Cambio en AOV (%)',
+          data: [12, 8, 15, 5, -10, -2],
+          backgroundColor: 'rgba(223, 23, 131, 0.2)',
+          borderColor: 'rgba(223, 23, 131, 1)',
+          pointBackgroundColor: 'rgba(223, 23, 131, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(223, 23, 131, 1)'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            angleLines: {
+              display: true
+            },
+            suggestedMin: -15,
+            suggestedMax: 20
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Rendimiento por categoría de producto'
+          }
+        }
+      }
+    };
+  }
 
-            // Chart 5: Future Projections
-            const projectionsCtx = document.getElementById('projectionsChart').getContext('2d');
-            new Chart(projectionsCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['2025', '2026', '2030', '2035'],
-                    datasets: [
-                        {
-                            label: 'Investigación prolongada',
-                            data: [85, 90, 75, 60],
-                            backgroundColor: 'rgba(223, 23, 131, 0.7)'
-                        },
-                        {
-                            label: 'Marketing de influencia',
-                            data: [40, 45, 80, 65],
-                            backgroundColor: 'rgba(51, 51, 51, 0.7)'
-                        },
-                        {
-                            label: 'Realidad aumentada',
-                            data: [10, 15, 35, 75],
-                            backgroundColor: 'rgba(223, 23, 131, 0.5)'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Adopción estimada (%)'
-                            }
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Proyección de tendencias de consumo'
-                        }
-                    }
-                }
-            });
+  function getProjectionsChartConfig() {
+    return {
+      type: 'bar',
+      data: {
+        labels: ['2025', '2026', '2030', '2035'],
+        datasets: [
+          {
+            label: 'Investigación prolongada',
+            data: [85, 90, 75, 60],
+            backgroundColor: 'rgba(223, 23, 131, 0.7)'
+          },
+          {
+            label: 'Marketing de influencia',
+            data: [40, 45, 80, 65],
+            backgroundColor: 'rgba(51, 51, 51, 0.7)'
+          },
+          {
+            label: 'Realidad aumentada',
+            data: [10, 15, 35, 75],
+            backgroundColor: 'rgba(223, 23, 131, 0.5)'
+          }
+        ]
+      },
+      options: getCommonChartOptions({
+        yTitle: 'Adopción estimada (%)',
+        title: 'Proyección de tendencias de consumo'
+      })
+    };
+  }
 
-            // PDF Download functionality
-            document.getElementById('downloadPdfBtn').addEventListener('click', function() {
-                // Use html2canvas and jsPDF to generate PDF
-                const { jsPDF } = window.jspdf;
-                
-                html2canvas(document.getElementById('page-container')).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdf = new jsPDF('p', 'mm', 'a4');
-                    const imgWidth = 210; // A4 width in mm
-                    const pageHeight = 295; // A4 height in mm
-                    const imgHeight = canvas.height * imgWidth / canvas.width;
-                    let heightLeft = imgHeight;
-                    let position = 0;
-                    
-                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                    
-                    while (heightLeft >= 0) {
-                        position = heightLeft - imgHeight;
-                        pdf.addPage();
-                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                        heightLeft -= pageHeight;
-                    }
-                    
-                    pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
-                });
-            });
-        });
-    </script>
+  function getCommonChartOptions({ yTitle, xTitle, title, beginAtZero = true }) {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: beginAtZero,
+          title: { display: true, text: yTitle }
+        },
+        ...(xTitle && {
+          x: { title: { display: true, text: xTitle } }
+        })
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: title
+        }
+      }
+    };
+  }
 
+  // 2. PDF DOWNLOAD FUNCTIONALITY
+  function setupPDFDownload() {
+    document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
+    document.getElementById('hero-download-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('downloadPdfBtn').click();
+    });
+  }
 
-    <script>
-        // You can add this to your existing script section
-        document.getElementById('hero-download-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Trigger your PDF download functionality here
-            document.getElementById('downloadPdfBtn').click();
-        });
+  async function generatePDF() {
+    const { jsPDF } = window.jspdf;
+    const element = document.getElementById('page-container');
+    const clone = element.cloneNode(true);
+    prepareContentForPDF(clone);
+    
+    const canvas = await html2canvas(clone, {
+      scale: 2,
+      logging: false,
+      useCORS: true,
+      allowTaint: true
+    });
+    
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const margin = 20;
+    const pageWidth = pdf.internal.pageSize.getWidth() - (margin * 2);
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    
+    addPagesToPDF(pdf, canvas, margin, imgWidth, imgHeight);
+    addPageNumbers(pdf, margin);
+    
+    pdf.save('Tendencias-Consumo-2025-Bebell.pdf');
+    clone.remove();
+  }
 
-    </script>
+  function prepareContentForPDF(clone) {
+    clone.querySelectorAll('.video-container, .fb-comments-container, .custom-image-widget')
+       .forEach(el => el.remove());
+    
+    const style = document.createElement('style');
+    style.innerHTML = `
+      body { font-family: Arial; line-height: 1.5; }
+      .content-section, .chart-container { page-break-inside: avoid; }
+      img { max-width: 100%; height: auto; }
+      a { color: #DF1783; text-decoration: underline; }
+    `;
+    clone.prepend(style);
+    clone.style.width = '100%';
+    clone.style.padding = '0';
+    clone.style.margin = '0';
+  }
 
-<script>
-  lucide.createIcons(); // Activates all Lucide icons
+  function addPagesToPDF(pdf, canvas, margin, imgWidth, imgHeight) {
+    const pageHeight = pdf.internal.pageSize.getHeight() - (margin * 2);
+    let heightLeft = imgHeight;
+    let position = margin;
+    let pageCount = 1;
+    
+    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+    
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight + margin;
+      pdf.addPage();
+      pageCount++;
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+  }
+
+  function addPageNumbers(pdf, margin) {
+    const pageCount = pdf.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      pdf.setPage(i);
+      pdf.setFontSize(10);
+      pdf.setTextColor(150);
+      pdf.text(
+        `Página ${i} de ${pageCount}`,
+        pdf.internal.pageSize.getWidth() - margin,
+        pdf.internal.pageSize.getHeight() - 10,
+        { align: 'right' }
+      );
+    }
+  }
 </script>
 
+<!-- Lucide Icons Initialization -->
+<script>
+  lucide.createIcons();
+</script>
     
 </body>
 </html>
