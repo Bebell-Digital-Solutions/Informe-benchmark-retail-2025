@@ -8,16 +8,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
-      <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+  <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Favicon -->
     <link rel="icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/8693866308ced9e7451285a4fc716d1d589c8bc4.png">  
     
-    
+      <!-- Add this to use Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
@@ -239,12 +235,22 @@
             background-color: #b8126a;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(223, 23, 131, 0.3);
+            color: white;
         }
         
         .hero-button i {
             margin-right: 10px;
             font-size: 1.1rem;
+              vertical-align: middle;
         }
+
+        /* For Lucide specifically */
+.hero-button svg {
+  width: 1.1em;
+  height: 1.1em;
+  margin-right: 8px;
+  vertical-align: middle;
+}
         
         @media (max-width: 768px) {
             #hero-card {
@@ -464,15 +470,14 @@ padding: 20px;
                 <h2 class="hero-title">Informe Exclusivo 2025</h2>
                 <h3 class="hero-subtitle">Datos clave sobre el comportamiento del consumidor</h3>
                 <p class="hero-text">Descubre las tendencias que están transformando el panorama del marketing digital y el comercio electrónico en este año clave. Nuestro informe detallado te proporcionará insights accionables para tu estrategia.</p>
-                <a href="#" class="hero-button" id="hero-download-btn">
-                    <i class="fas fa-download"></i> Descargar Informe
+                <a id="downloadPdfBtn" class="cta-button">
+                    <i data-lucide="download"></i> Descargar Informe
                 </a>
             </div>
             <div id="hero-image">
                 <img src="https://bucket.mlcdn.com/a/3336/3336910/images/17b6b181b32210b008ee8125137a2641847c3491.png" alt="Tendencias de consumo 2025">
             </div>
         </section>
-
 
 
 
@@ -587,8 +592,8 @@ padding: 20px;
             <p>Para obtener el informe completo en formato PDF, incluyendo gráficos interactivos y ejemplos detallados.</p>
             
             <div class="button-container">
-                <button id="downloadPdfBtn" class="cta-button">Descargar PDF del Artículo</button>
-                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">Más Recursos</a>
+                <button id="downloadPdfBtn" class="cta-button">Descargar Reporte</button>
+                <a href="https://impact.com/affiliate/consumer-spending-trends-2025/?utm_source=impact-operator&utm_medium=login-page-content&utm_campaign=mid-year-report" class="cta-button" target="_blank">Explorar Fuente</a>
             </div>
         </section>
 
@@ -907,14 +912,11 @@ padding: 20px;
             document.getElementById('downloadPdfBtn').click();
         });
 
-
-        // Run Lucide Icon Library
-    refreshLucideIcons();
-}
-        
     </script>
 
-
+<script>
+  lucide.createIcons(); // Activates all Lucide icons
+</script>
 
     
 </body>
